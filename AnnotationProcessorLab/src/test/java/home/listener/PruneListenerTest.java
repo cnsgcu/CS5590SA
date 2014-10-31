@@ -1,5 +1,6 @@
 package home.listener;
 
+import home.annotation.FeatureOpt;
 import home.grammar.JavaLexer;
 import home.grammar.JavaParser;
 import org.antlr.v4.runtime.ANTLRInputStream;
@@ -27,7 +28,7 @@ public class PruneListenerTest
         final ParseTree tree = parser.compilationUnit();
 
         final ParseTreeWalker walker = new ParseTreeWalker();
-        final PruneListener pruner = new PruneListener(tokens);
+        final PruneListener pruner = new PruneListener(tokens, FeatureOpt.CHATTING);
         walker.walk(pruner, tree);
 
         System.out.println(pruner);

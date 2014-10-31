@@ -1,5 +1,7 @@
 package home.listener;
 
+import home.annotation.Feature;
+import home.annotation.FeatureOpt;
 import home.grammar.JavaBaseListener;
 import home.grammar.JavaLexer;
 import home.grammar.JavaParser;
@@ -11,7 +13,10 @@ import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.TokenStreamRewriter;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -19,11 +24,13 @@ public class PruneListener extends JavaBaseListener
 {
     private TokenStream tokens;
     private TokenStreamRewriter rewriter;
+    private Set<FeatureOpt> featureOptSet;
 
-    public PruneListener(TokenStream tokens)
+    public PruneListener(TokenStream tokens, FeatureOpt... featureOpts)
     {
         this.tokens = tokens;
         this.rewriter = new TokenStreamRewriter(tokens);
+        this.featureOptSet = new TreeSet<>(Arrays.asList(featureOpts));
     }
 
     @Override
@@ -35,19 +42,19 @@ public class PruneListener extends JavaBaseListener
     @Override
     public void exitImportDeclaration(JavaParser.ImportDeclarationContext ctx)
     {
-        prune(ctx, token -> rewriter.delete(token, ctx.getStop()));
+        pruneBlock(ctx, token -> rewriter.delete(token, ctx.getStop()));
     }
 
     @Override
     public void exitStatement(JavaParser.StatementContext ctx)
     {
-        prune(ctx, token -> rewriter.delete(token, ctx.getStop()));
+        pruneBlock(ctx, token -> rewriter.delete(token, ctx.getStop()));
     }
 
     @Override
     public void exitSuperclass(JavaParser.SuperclassContext ctx)
     {
-        prune((ParserRuleContext) ctx.getChild(1), token -> rewriter.delete(ctx.getStart(), ctx.getStop()));
+        pruneBlock((ParserRuleContext) ctx.getChild(1), token -> rewriter.delete(ctx.getStart(), ctx.getStop()));
     }
 
     @Override
@@ -76,7 +83,7 @@ public class PruneListener extends JavaBaseListener
                         final JavaParser htParser = new JavaParser(hiddenTokenStream);
                         final JavaParser.AnnotationContext annotationCtx = htParser.annotation();
 
-                        if (annotationCtx != null) {
+                        if (isPruneAnnotation(annotationCtx)) {
                             return false;
                         }
                     }
@@ -91,7 +98,7 @@ public class PruneListener extends JavaBaseListener
         } else {
             String interfaceList = keepInterfaceTypes.stream()
                 .map(ParseTree::getText)
-                .reduce((il, ir) -> il + "," + ir)
+                .reduce((il, ir) -> il + ", " + ir)
                 .orElse("");
 
             rewriter.replace(ctx.getStart(), ctx.getStop(), ctx.children.get(0).getText() + " " + interfaceList);
@@ -101,38 +108,35 @@ public class PruneListener extends JavaBaseListener
     @Override
     public void exitFieldDeclaration(JavaParser.FieldDeclarationContext ctx)
     {
-        final ParserRuleContext classBodyDeclaration = ctx.getParent().getParent();
-
-        for (ParseTree child : classBodyDeclaration.children) {
-            if (child instanceof JavaParser.ModifierContext) {
-                final JavaParser.AnnotationContext annotationContext = ((JavaParser.ModifierContext) child).classOrInterfaceModifier().annotation();
-
-                if (isPrune(annotationContext)) {
-                    rewriter.delete(classBodyDeclaration.getStart(), classBodyDeclaration.getStop());
-                    break;
-                }
-            }
-        }
+        prune(ctx);
     }
 
     @Override
     public void exitMethodDeclaration(JavaParser.MethodDeclarationContext ctx)
     {
-        final ParserRuleContext classBodyDeclaration = ctx.getParent().getParent();
+        prune(ctx);
+    }
+
+    private void prune(final ParserRuleContext prCtx)
+    {
+        final ParserRuleContext classBodyDeclaration = prCtx.getParent().getParent();
 
         for (ParseTree child : classBodyDeclaration.children) {
             if (child instanceof JavaParser.ModifierContext) {
-                final JavaParser.AnnotationContext annotationContext = ((JavaParser.ModifierContext) child).classOrInterfaceModifier().annotation();
+                final JavaParser.AnnotationContext annotationCtx = ((JavaParser.ModifierContext) child).classOrInterfaceModifier().annotation();
 
-                if (isPrune(annotationContext)) {
+                if (isPruneAnnotation(annotationCtx)) {
                     rewriter.delete(classBodyDeclaration.getStart(), classBodyDeclaration.getStop());
+                    break;
+                } else if (isFeatureAnnotation(annotationCtx)) {
+                    rewriter.delete(annotationCtx.getStart(), annotationCtx.getStop());
                     break;
                 }
             }
         }
     }
 
-    private void prune(final ParserRuleContext prCtx, final Consumer<Token> action)
+    private void pruneBlock(final ParserRuleContext prCtx, final Consumer<Token> action)
     {
         final List<Token> leftHiddenTokens = ((CommonTokenStream) tokens).getHiddenTokensToLeft(
             prCtx.getStart().getTokenIndex(),
@@ -150,18 +154,49 @@ public class PruneListener extends JavaBaseListener
                 final JavaParser htParser = new JavaParser(htStream);
                 final JavaParser.AnnotationContext annotationCtx = htParser.annotation();
 
-                if (annotationCtx != null) {
+                if (isPruneAnnotation(annotationCtx)) {
                     action.accept(hiddenToken);
+                    break;
+                } else if (isFeatureAnnotation(annotationCtx)) {
+                    rewriter.delete(hiddenToken);
                     break;
                 }
             }
         }
     }
 
-    private boolean isPrune(final JavaParser.AnnotationContext annotationContext)
+    private boolean isPruneAnnotation(final JavaParser.AnnotationContext ctx)
+    {
+        if (isFeatureAnnotation(ctx)) {
+            final JavaParser.ElementValueArrayInitializerContext arrayInitializerCtx = ctx.elementValue().elementValueArrayInitializer();
+
+            if (arrayInitializerCtx != null) {
+                for (ParseTree child : arrayInitializerCtx.children) {
+                    if (child instanceof JavaParser.ElementValueContext) {
+                        final String name = child.getText().replace(FeatureOpt.class.getSimpleName() + ".", "");
+
+                        if (!featureOptSet.contains(FeatureOpt.valueOf(name))) {
+                            return false;
+                        }
+                    }
+                }
+            } else {
+                final String name = ctx.elementValue().getText().replace(FeatureOpt.class.getSimpleName() + ".", "");
+
+                if (!featureOptSet.contains(FeatureOpt.valueOf(name))) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean isFeatureAnnotation(final JavaParser.AnnotationContext annotationContext)
     {
         return annotationContext != null
-            && "Feature".equals(tokens.getText(annotationContext.annotationName()))
-            && "\"chatting\"".equals(tokens.getText(annotationContext.elementValue()));
+            && Feature.class.getSimpleName().equals(annotationContext.annotationName().getText());
     }
 }

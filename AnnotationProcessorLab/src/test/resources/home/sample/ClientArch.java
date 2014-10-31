@@ -23,10 +23,11 @@ import edu.uci.isr.myx.fw.AbstractMyxSimpleBrick;
 import edu.uci.isr.myx.fw.IMyxName;
 import edu.uci.isr.myx.fw.MyxUtils;
 import home.annotation.Feature;
+import home.annotation.FeatureOpt;
 
-public class ClientArch extends AbstractMyxSimpleBrick implements /*@Feature("chatting")*/ IChatListener,IFileSentListener,IImageSent,ITTTListener,IGameListener,ITempletSend,IToolBarEvent
+public class ClientArch extends AbstractMyxSimpleBrick implements /*@Feature(FeatureOpt.GAMING)*/ IChatListener,IFileSentListener,IImageSent,ITTTListener,IGameListener,ITempletSend,IToolBarEvent
 {
-    @Feature("chatting")
+    @Feature(FeatureOpt.CHATTING)
     public static final IMyxName msg_IChat = MyxUtils.createName("com.pla.chatsys.IChat");
     public static final IMyxName msg_IChatListener = MyxUtils.createName("com.pla.chatsys.IChatListener");
     public static final IMyxName msg_IPrintEvent = MyxUtils.createName("com.pla.chatsys.IPrintEvent");
@@ -81,9 +82,9 @@ public class ClientArch extends AbstractMyxSimpleBrick implements /*@Feature("ch
     }
     
     public void begin(){
-        /*@Feature("chatting")*/
+        /*@Feature(FeatureOpt.CHATTING)*/
         OUT_IChat = (IChat) MyxUtils.getFirstRequiredServiceObject(this,msg_IChat);
-        /*@Feature("chatting")*/
+        /*@Feature(FeatureOpt.CHATTING)*/
         if (OUT_IChat == null){
  			System.err.println("Error: Interface com.pla.chatsys.IChat returned null");
 			return;       
@@ -169,7 +170,6 @@ public class ClientArch extends AbstractMyxSimpleBrick implements /*@Feature("ch
 		return null;
 	}
 
-    @Feature("chatting")
     public void messageSent (String sender,String message)   {
 		_imp.messageSent(sender,message);
     }    

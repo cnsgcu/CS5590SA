@@ -40,6 +40,8 @@ import javax.swing.JTextField;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import home.annotation.Feature;
+import home.annotation.FeatureOpt;
 import org.w3c.dom.CharacterData;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -160,7 +162,7 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp
 		loadButton = new JButton("Chat History");
 		transcript.setEditable(false);
 		sendButton.addActionListener(this);
-		
+
 		settingsButton.addActionListener(new ActionListener() {
 			
 			@Override
