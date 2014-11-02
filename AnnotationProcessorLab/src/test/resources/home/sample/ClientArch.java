@@ -25,7 +25,7 @@ import edu.uci.isr.myx.fw.MyxUtils;
 import home.annotation.Feature;
 import home.annotation.FeatureOpt;
 
-public class ClientArch extends AbstractMyxSimpleBrick implements /*@Feature(FeatureOpt.GAMING)*/ IChatListener,IFileSentListener,IImageSent,ITTTListener,IGameListener,ITempletSend,IToolBarEvent
+public class ClientArch extends AbstractMyxSimpleBrick implements IChatListener,IFileSentListener,IImageSent,ITTTListener,IGameListener,ITempletSend,IToolBarEvent
 {
     @Feature(FeatureOpt.CHATTING)
     public static final IMyxName msg_IChat = MyxUtils.createName("com.pla.chatsys.IChat");

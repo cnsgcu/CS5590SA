@@ -14,11 +14,11 @@ import org.antlr.v4.runtime.TokenStreamRewriter;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 public class PruneListener extends JavaBaseListener
 {
@@ -60,9 +60,10 @@ public class PruneListener extends JavaBaseListener
     @Override
     public void exitSuperinterfaces(JavaParser.SuperinterfacesContext ctx)
     {
-        List<ParseTree> keepInterfaceTypes = ((ParserRuleContext) ctx.getChild(1)).children.stream()
-            .filter(child -> child instanceof ParserRuleContext)
-            .filter(child -> {
+        List<ParseTree> keepInterfaceTypes = new LinkedList<>();
+
+        for (ParseTree child : ((ParserRuleContext) ctx.getChild(1)).children) {
+            if (child instanceof ParserRuleContext) {
                 final ParserRuleContext ruleContext = (ParserRuleContext) child;
 
                 final List<Token> leftHiddenTokens = ((CommonTokenStream) tokens).getHiddenTokensToLeft(
@@ -74,7 +75,7 @@ public class PruneListener extends JavaBaseListener
                     for (Token hiddenToken : leftHiddenTokens) {
                         final String htText = hiddenToken.getText();
                         final ANTLRInputStream htInputStream = new ANTLRInputStream(
-                            htText.substring(2, htText.length() - 2)
+                                htText.substring(2, htText.length() - 2)
                         );
 
                         final JavaLexer htLexer = new JavaLexer(htInputStream);
@@ -83,15 +84,16 @@ public class PruneListener extends JavaBaseListener
                         final JavaParser htParser = new JavaParser(hiddenTokenStream);
                         final JavaParser.AnnotationContext annotationCtx = htParser.annotation();
 
-                        if (isPruneAnnotation(annotationCtx)) {
-                            return false;
+                        if (!isPruneAnnotation(annotationCtx)) {
+                            keepInterfaceTypes.add(child);
+                            break;
                         }
                     }
+                } else {
+                    keepInterfaceTypes.add(child);
                 }
-
-                return true;
-            })
-            .collect(Collectors.toList());
+            }
+        }
 
         if (keepInterfaceTypes.isEmpty()) {
             rewriter.delete(ctx.getStart(), ctx.getStop());

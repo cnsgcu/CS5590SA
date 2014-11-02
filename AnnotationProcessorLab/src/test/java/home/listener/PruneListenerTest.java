@@ -16,7 +16,7 @@ public class PruneListenerTest
 {
     public static void main(String[] args) throws IOException
     {
-        final String file = "AnnotationProcessorLab/src/test/resources/home/sample/ClientImp.java";
+        final String file = "AnnotationProcessorLab/src/test/resources/home/sample/ClientArch.java";
         final InputStream fileInput = new FileInputStream(file);
 
         final ANTLRInputStream antIS = new ANTLRInputStream(fileInput);
