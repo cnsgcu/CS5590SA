@@ -22,7 +22,7 @@ public class XMLAnnotationListener extends XMLParserBaseListener
     }
 
     @Override
-    public void enterElement(XMLParser.ElementContext ctx)
+    public void exitElement(XMLParser.ElementContext ctx)
     {
         List<Token> tokenList =  ((CommonTokenStream) tokens).getHiddenTokensToLeft(
             ctx.getStart().getTokenIndex(),
