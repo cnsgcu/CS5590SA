@@ -36,7 +36,7 @@ document    :   prolog? misc* element misc*;
 prolog      :   XMLDeclOpen attribute* SPECIAL_CLOSE ;
 
 content     :   chardata?
-                ((element | reference | CDATA | PI | COMMENT) chardata?)* ;
+                ((element | reference | CDATA | PI ) chardata?)* ;
 
 element     :   '<' Name attribute* '>' content '<' '/' Name '>'
             |   '<' Name attribute* '/>'
@@ -51,4 +51,4 @@ attribute   :   Name '=' STRING ; // Our STRING is AttValue in spec
  */
 chardata    :   TEXT | SEA_WS ;
 
-misc        :   COMMENT | PI | SEA_WS ;
+misc        :   PI | SEA_WS ;

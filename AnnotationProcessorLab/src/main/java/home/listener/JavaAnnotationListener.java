@@ -20,13 +20,13 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Consumer;
 
-public class PruneListener extends JavaBaseListener
+public class JavaAnnotationListener extends JavaBaseListener
 {
-    private TokenStream tokens;
-    private TokenStreamRewriter rewriter;
-    private Set<FeatureOpt> featureOptSet;
+    final private TokenStream tokens;
+    final private TokenStreamRewriter rewriter;
+    final private Set<FeatureOpt> featureOptSet;
 
-    public PruneListener(TokenStream tokens, FeatureOpt... featureOpts)
+    public JavaAnnotationListener(TokenStream tokens, FeatureOpt... featureOpts)
     {
         this.tokens = tokens;
         this.rewriter = new TokenStreamRewriter(tokens);
@@ -75,7 +75,7 @@ public class PruneListener extends JavaBaseListener
                     for (Token hiddenToken : leftHiddenTokens) {
                         final String htText = hiddenToken.getText();
                         final ANTLRInputStream htInputStream = new ANTLRInputStream(
-                                htText.substring(2, htText.length() - 2)
+                            htText.substring(2, htText.length() - 2)
                         );
 
                         final JavaLexer htLexer = new JavaLexer(htInputStream);

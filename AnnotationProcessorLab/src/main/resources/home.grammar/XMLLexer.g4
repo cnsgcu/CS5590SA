@@ -29,13 +29,18 @@
 /** XML lexer derived from ANTLR v4 ref guide book example */
 lexer grammar XMLLexer;
 
+@lexer::members {
+   public static final int WHITESPACE_CHANNEL   = 1;
+   public static final int COMMENT_CHANNEL      = 2;
+}
+
 // Default "mode": Everything OUTSIDE of a tag
-COMMENT     :   '<!--' .*? '-->' ;
+COMMENT     :   '<!--' .*? '-->' S+     -> channel(COMMENT_CHANNEL) ;
 CDATA       :   '<![CDATA[' .*? ']]>' ;
 /** Scarf all DTD stuff, Entity Declarations like <!ENTITY ...>,
  *  and Notation Declarations <!NOTATION ...>
  */
-DTD         :   '<!' .*? '>'            -> skip ; 
+DTD         :   '<!' .*? '>'            -> skip ;
 EntityRef   :   '&' Name ';' ;
 CharRef     :   '&#' DIGIT+ ';'
             |   '&#x' HEXDIGIT+ ';'
@@ -60,7 +65,7 @@ STRING      :   '"' ~[<"]* '"'
             |   '\'' ~[<']* '\''
             ;
 Name        :   NameStartChar NameChar* ;
-S           :   [ \t\r\n]               -> skip ;
+S           :   [ \t\r\n]               -> channel(WHITESPACE_CHANNEL);
 
 fragment
 HEXDIGIT    :   [a-fA-F0-9] ;

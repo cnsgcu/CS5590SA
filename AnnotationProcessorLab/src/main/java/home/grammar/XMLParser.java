@@ -1,17 +1,24 @@
 // Generated from /Users/cuong/IdeaProjects/JavaLab/AnnotationProcessorLab/src/main/resources/home.grammar/XMLParser.g4 by ANTLR 4.4.1-dev
 package home.grammar;
-import org.antlr.v4.runtime.atn.*;
+import org.antlr.v4.runtime.NoViableAltException;
+import org.antlr.v4.runtime.Parser;
+import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.RecognitionException;
+import org.antlr.v4.runtime.RuntimeMetaData;
+import org.antlr.v4.runtime.TokenStream;
+import org.antlr.v4.runtime.atn.ATN;
+import org.antlr.v4.runtime.atn.ATNDeserializer;
+import org.antlr.v4.runtime.atn.ParserATNSimulator;
+import org.antlr.v4.runtime.atn.PredictionContextCache;
 import org.antlr.v4.runtime.dfa.DFA;
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.misc.*;
-import org.antlr.v4.runtime.tree.*;
+import org.antlr.v4.runtime.tree.ParseTreeListener;
+import org.antlr.v4.runtime.tree.TerminalNode;
+
 import java.util.List;
-import java.util.Iterator;
-import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class XMLParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.4.1-dev", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.3", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -97,7 +104,7 @@ public class XMLParser extends Parser {
 			setState(22);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << COMMENT) | (1L << SEA_WS) | (1L << PI))) != 0)) {
+			while (_la==SEA_WS || _la==PI) {
 				{
 				{
 				setState(19); misc();
@@ -111,7 +118,7 @@ public class XMLParser extends Parser {
 			setState(29);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << COMMENT) | (1L << SEA_WS) | (1L << PI))) != 0)) {
+			while (_la==SEA_WS || _la==PI) {
 				{
 				{
 				setState(26); misc();
@@ -204,16 +211,12 @@ public class XMLParser extends Parser {
 		public ElementContext element(int i) {
 			return getRuleContext(ElementContext.class,i);
 		}
-		public TerminalNode COMMENT(int i) {
-			return getToken(XMLParser.COMMENT, i);
-		}
 		public TerminalNode CDATA(int i) {
 			return getToken(XMLParser.CDATA, i);
 		}
 		public ReferenceContext reference(int i) {
 			return getRuleContext(ReferenceContext.class,i);
 		}
-		public List<TerminalNode> COMMENT() { return getTokens(XMLParser.COMMENT); }
 		public ChardataContext chardata(int i) {
 			return getRuleContext(ChardataContext.class,i);
 		}
@@ -253,14 +256,14 @@ public class XMLParser extends Parser {
 				}
 			}
 
-			setState(56);
+			setState(55);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,7,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(49);
+					setState(48);
 					switch (_input.LA(1)) {
 					case OPEN:
 						{
@@ -283,26 +286,21 @@ public class XMLParser extends Parser {
 						setState(47); match(PI);
 						}
 						break;
-					case COMMENT:
-						{
-						setState(48); match(COMMENT);
-						}
-						break;
 					default:
 						throw new NoViableAltException(this);
 					}
-					setState(52);
+					setState(51);
 					_la = _input.LA(1);
 					if (_la==SEA_WS || _la==TEXT) {
 						{
-						setState(51); chardata();
+						setState(50); chardata();
 						}
 					}
 
 					}
 					} 
 				}
-				setState(58);
+				setState(57);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,7,_ctx);
 			}
@@ -352,53 +350,53 @@ public class XMLParser extends Parser {
 		enterRule(_localctx, 6, RULE_element);
 		int _la;
 		try {
-			setState(83);
+			setState(82);
 			switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(59); match(OPEN);
-				setState(60); match(Name);
-				setState(64);
+				setState(58); match(OPEN);
+				setState(59); match(Name);
+				setState(63);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==Name) {
 					{
 					{
-					setState(61); attribute();
+					setState(60); attribute();
 					}
 					}
-					setState(66);
+					setState(65);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(67); match(CLOSE);
-				setState(68); content();
-				setState(69); match(OPEN);
-				setState(70); match(SLASH);
-				setState(71); match(Name);
-				setState(72); match(CLOSE);
+				setState(66); match(CLOSE);
+				setState(67); content();
+				setState(68); match(OPEN);
+				setState(69); match(SLASH);
+				setState(70); match(Name);
+				setState(71); match(CLOSE);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(74); match(OPEN);
-				setState(75); match(Name);
-				setState(79);
+				setState(73); match(OPEN);
+				setState(74); match(Name);
+				setState(78);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==Name) {
 					{
 					{
-					setState(76); attribute();
+					setState(75); attribute();
 					}
 					}
-					setState(81);
+					setState(80);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(82); match(SLASH_CLOSE);
+				setState(81); match(SLASH_CLOSE);
 				}
 				break;
 			}
@@ -438,7 +436,7 @@ public class XMLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(85);
+			setState(84);
 			_la = _input.LA(1);
 			if ( !(_la==EntityRef || _la==CharRef) ) {
 			_errHandler.recoverInline(this);
@@ -480,9 +478,9 @@ public class XMLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(87); match(Name);
-			setState(88); match(EQUALS);
-			setState(89); match(STRING);
+			setState(86); match(Name);
+			setState(87); match(EQUALS);
+			setState(88); match(STRING);
 			}
 		}
 		catch (RecognitionException re) {
@@ -520,7 +518,7 @@ public class XMLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(91);
+			setState(90);
 			_la = _input.LA(1);
 			if ( !(_la==SEA_WS || _la==TEXT) ) {
 			_errHandler.recoverInline(this);
@@ -542,7 +540,6 @@ public class XMLParser extends Parser {
 	public static class MiscContext extends ParserRuleContext {
 		public TerminalNode SEA_WS() { return getToken(XMLParser.SEA_WS, 0); }
 		public TerminalNode PI() { return getToken(XMLParser.PI, 0); }
-		public TerminalNode COMMENT() { return getToken(XMLParser.COMMENT, 0); }
 		public MiscContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -564,9 +561,9 @@ public class XMLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(93);
+			setState(92);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << COMMENT) | (1L << SEA_WS) | (1L << PI))) != 0)) ) {
+			if ( !(_la==SEA_WS || _la==PI) ) {
 			_errHandler.recoverInline(this);
 			}
 			consume();
@@ -584,32 +581,31 @@ public class XMLParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\24b\4\2\t\2\4\3\t"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\24a\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\3\2\5\2\24\n\2\3\2"+
 		"\7\2\27\n\2\f\2\16\2\32\13\2\3\2\3\2\7\2\36\n\2\f\2\16\2!\13\2\3\3\3\3"+
-		"\7\3%\n\3\f\3\16\3(\13\3\3\3\3\3\3\4\5\4-\n\4\3\4\3\4\3\4\3\4\3\4\5\4"+
-		"\64\n\4\3\4\5\4\67\n\4\7\49\n\4\f\4\16\4<\13\4\3\5\3\5\3\5\7\5A\n\5\f"+
-		"\5\16\5D\13\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\7\5P\n\5\f\5\16"+
-		"\5S\13\5\3\5\5\5V\n\5\3\6\3\6\3\7\3\7\3\7\3\7\3\b\3\b\3\t\3\t\3\t\2\2"+
-		"\n\2\4\6\b\n\f\16\20\2\5\3\2\6\7\4\2\b\b\13\13\5\2\3\3\b\b\24\24g\2\23"+
-		"\3\2\2\2\4\"\3\2\2\2\6,\3\2\2\2\bU\3\2\2\2\nW\3\2\2\2\fY\3\2\2\2\16]\3"+
-		"\2\2\2\20_\3\2\2\2\22\24\5\4\3\2\23\22\3\2\2\2\23\24\3\2\2\2\24\30\3\2"+
-		"\2\2\25\27\5\20\t\2\26\25\3\2\2\2\27\32\3\2\2\2\30\26\3\2\2\2\30\31\3"+
-		"\2\2\2\31\33\3\2\2\2\32\30\3\2\2\2\33\37\5\b\5\2\34\36\5\20\t\2\35\34"+
-		"\3\2\2\2\36!\3\2\2\2\37\35\3\2\2\2\37 \3\2\2\2 \3\3\2\2\2!\37\3\2\2\2"+
-		"\"&\7\n\2\2#%\5\f\7\2$#\3\2\2\2%(\3\2\2\2&$\3\2\2\2&\'\3\2\2\2\')\3\2"+
-		"\2\2(&\3\2\2\2)*\7\r\2\2*\5\3\2\2\2+-\5\16\b\2,+\3\2\2\2,-\3\2\2\2-:\3"+
-		"\2\2\2.\64\5\b\5\2/\64\5\n\6\2\60\64\7\4\2\2\61\64\7\24\2\2\62\64\7\3"+
-		"\2\2\63.\3\2\2\2\63/\3\2\2\2\63\60\3\2\2\2\63\61\3\2\2\2\63\62\3\2\2\2"+
-		"\64\66\3\2\2\2\65\67\5\16\b\2\66\65\3\2\2\2\66\67\3\2\2\2\679\3\2\2\2"+
-		"8\63\3\2\2\29<\3\2\2\2:8\3\2\2\2:;\3\2\2\2;\7\3\2\2\2<:\3\2\2\2=>\7\t"+
-		"\2\2>B\7\22\2\2?A\5\f\7\2@?\3\2\2\2AD\3\2\2\2B@\3\2\2\2BC\3\2\2\2CE\3"+
-		"\2\2\2DB\3\2\2\2EF\7\f\2\2FG\5\6\4\2GH\7\t\2\2HI\7\17\2\2IJ\7\22\2\2J"+
-		"K\7\f\2\2KV\3\2\2\2LM\7\t\2\2MQ\7\22\2\2NP\5\f\7\2ON\3\2\2\2PS\3\2\2\2"+
-		"QO\3\2\2\2QR\3\2\2\2RT\3\2\2\2SQ\3\2\2\2TV\7\16\2\2U=\3\2\2\2UL\3\2\2"+
-		"\2V\t\3\2\2\2WX\t\2\2\2X\13\3\2\2\2YZ\7\22\2\2Z[\7\20\2\2[\\\7\21\2\2"+
-		"\\\r\3\2\2\2]^\t\3\2\2^\17\3\2\2\2_`\t\4\2\2`\21\3\2\2\2\r\23\30\37&,"+
-		"\63\66:BQU";
+		"\7\3%\n\3\f\3\16\3(\13\3\3\3\3\3\3\4\5\4-\n\4\3\4\3\4\3\4\3\4\5\4\63\n"+
+		"\4\3\4\5\4\66\n\4\7\48\n\4\f\4\16\4;\13\4\3\5\3\5\3\5\7\5@\n\5\f\5\16"+
+		"\5C\13\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\7\5O\n\5\f\5\16\5R\13"+
+		"\5\3\5\5\5U\n\5\3\6\3\6\3\7\3\7\3\7\3\7\3\b\3\b\3\t\3\t\3\t\2\2\n\2\4"+
+		"\6\b\n\f\16\20\2\5\3\2\6\7\4\2\b\b\13\13\4\2\b\b\24\24e\2\23\3\2\2\2\4"+
+		"\"\3\2\2\2\6,\3\2\2\2\bT\3\2\2\2\nV\3\2\2\2\fX\3\2\2\2\16\\\3\2\2\2\20"+
+		"^\3\2\2\2\22\24\5\4\3\2\23\22\3\2\2\2\23\24\3\2\2\2\24\30\3\2\2\2\25\27"+
+		"\5\20\t\2\26\25\3\2\2\2\27\32\3\2\2\2\30\26\3\2\2\2\30\31\3\2\2\2\31\33"+
+		"\3\2\2\2\32\30\3\2\2\2\33\37\5\b\5\2\34\36\5\20\t\2\35\34\3\2\2\2\36!"+
+		"\3\2\2\2\37\35\3\2\2\2\37 \3\2\2\2 \3\3\2\2\2!\37\3\2\2\2\"&\7\n\2\2#"+
+		"%\5\f\7\2$#\3\2\2\2%(\3\2\2\2&$\3\2\2\2&\'\3\2\2\2\')\3\2\2\2(&\3\2\2"+
+		"\2)*\7\r\2\2*\5\3\2\2\2+-\5\16\b\2,+\3\2\2\2,-\3\2\2\2-9\3\2\2\2.\63\5"+
+		"\b\5\2/\63\5\n\6\2\60\63\7\4\2\2\61\63\7\24\2\2\62.\3\2\2\2\62/\3\2\2"+
+		"\2\62\60\3\2\2\2\62\61\3\2\2\2\63\65\3\2\2\2\64\66\5\16\b\2\65\64\3\2"+
+		"\2\2\65\66\3\2\2\2\668\3\2\2\2\67\62\3\2\2\28;\3\2\2\29\67\3\2\2\29:\3"+
+		"\2\2\2:\7\3\2\2\2;9\3\2\2\2<=\7\t\2\2=A\7\22\2\2>@\5\f\7\2?>\3\2\2\2@"+
+		"C\3\2\2\2A?\3\2\2\2AB\3\2\2\2BD\3\2\2\2CA\3\2\2\2DE\7\f\2\2EF\5\6\4\2"+
+		"FG\7\t\2\2GH\7\17\2\2HI\7\22\2\2IJ\7\f\2\2JU\3\2\2\2KL\7\t\2\2LP\7\22"+
+		"\2\2MO\5\f\7\2NM\3\2\2\2OR\3\2\2\2PN\3\2\2\2PQ\3\2\2\2QS\3\2\2\2RP\3\2"+
+		"\2\2SU\7\16\2\2T<\3\2\2\2TK\3\2\2\2U\t\3\2\2\2VW\t\2\2\2W\13\3\2\2\2X"+
+		"Y\7\22\2\2YZ\7\20\2\2Z[\7\21\2\2[\r\3\2\2\2\\]\t\3\2\2]\17\3\2\2\2^_\t"+
+		"\4\2\2_\21\3\2\2\2\r\23\30\37&,\62\659APT";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
