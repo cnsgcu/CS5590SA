@@ -16,7 +16,7 @@ public class JavaAnnotationListenerTest
 {
     public static void main(String[] args) throws IOException
     {
-        final String file = "AnnotationProcessorLab/src/test/resources/home/sample/ClientArch.java";
+        final String file = "AnnotationProcessor/src/test/resources/home/sample/ClientArch.java";
         final InputStream fileInput = new FileInputStream(file);
 
         final ANTLRInputStream antIS = new ANTLRInputStream(fileInput);

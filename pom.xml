@@ -12,8 +12,7 @@
 
     <modules>
         <module>Grammar</module>
-        <module>AnnotationLab</module>
-        <module>AnnotationProcessorLab</module>
+        <module>AnnotationProcessor</module>
     </modules>
 
     <properties>

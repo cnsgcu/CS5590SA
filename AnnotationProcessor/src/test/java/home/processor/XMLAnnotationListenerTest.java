@@ -15,7 +15,7 @@ public class XMLAnnotationListenerTest
 {
     public static void main(String[] args) throws IOException
     {
-        final String file = "AnnotationProcessorLab/src/test/resources/home/sample/arch.xml";
+        final String file = "AnnotationProcessor/src/test/resources/home/sample/arch.xml";
         final InputStream fileInput = new FileInputStream(file);
 
         final ANTLRInputStream antIS = new ANTLRInputStream(fileInput);
