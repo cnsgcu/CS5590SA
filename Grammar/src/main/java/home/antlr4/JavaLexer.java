@@ -1,13 +1,13 @@
-package home.grammar;
-import org.antlr.v4.runtime.CharStream;
+// Generated from Java.g4 by ANTLR 4.3
+package home.antlr4;
 import org.antlr.v4.runtime.Lexer;
-import org.antlr.v4.runtime.RuleContext;
-import org.antlr.v4.runtime.RuntimeMetaData;
-import org.antlr.v4.runtime.atn.ATN;
-import org.antlr.v4.runtime.atn.ATNDeserializer;
-import org.antlr.v4.runtime.atn.LexerATNSimulator;
-import org.antlr.v4.runtime.atn.PredictionContextCache;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.TokenStream;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
+import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class JavaLexer extends Lexer {
@@ -113,18 +113,20 @@ public class JavaLexer extends Lexer {
 	public void action(RuleContext _localctx, int ruleIndex, int actionIndex) {
 		switch (ruleIndex) {
 		case 144: WS_action((RuleContext)_localctx, actionIndex); break;
+
 		case 145: COMMENT_action((RuleContext)_localctx, actionIndex); break;
+
 		case 146: LINE_COMMENT_action((RuleContext)_localctx, actionIndex); break;
-		}
-	}
-	private void WS_action(RuleContext _localctx, int actionIndex) {
-		switch (actionIndex) {
-		case 0: _channel = WHITESPACE_CHANNEL; break;
 		}
 	}
 	private void LINE_COMMENT_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 2: _channel = COMMENT_LINE_CHANNEL; break;
+		}
+	}
+	private void WS_action(RuleContext _localctx, int actionIndex) {
+		switch (actionIndex) {
+		case 0: _channel = WHITESPACE_CHANNEL; break;
 		}
 	}
 	private void COMMENT_action(RuleContext _localctx, int actionIndex) {
@@ -136,6 +138,7 @@ public class JavaLexer extends Lexer {
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
 		case 140: return JavaLetter_sempred((RuleContext)_localctx, predIndex);
+
 		case 141: return JavaLetterOrDigit_sempred((RuleContext)_localctx, predIndex);
 		}
 		return true;
@@ -143,6 +146,7 @@ public class JavaLexer extends Lexer {
 	private boolean JavaLetterOrDigit_sempred(RuleContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 2: return Character.isJavaIdentifierPart(_input.LA(-1));
+
 		case 3: return Character.isJavaIdentifierPart(Character.toCodePoint((char)_input.LA(-2), (char)_input.LA(-1)));
 		}
 		return true;
@@ -150,6 +154,7 @@ public class JavaLexer extends Lexer {
 	private boolean JavaLetter_sempred(RuleContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0: return Character.isJavaIdentifierStart(_input.LA(-1));
+
 		case 1: return Character.isJavaIdentifierStart(Character.toCodePoint((char)_input.LA(-2), (char)_input.LA(-1)));
 		}
 		return true;

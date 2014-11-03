@@ -1,8 +1,8 @@
-package home.listener;
+package home.processor;
 
-import home.grammar.XMLLexer;
-import home.grammar.XMLParser;
-import home.grammar.XMLParserBaseListener;
+import home.antlr4.XMLLexer;
+import home.antlr4.XMLParser;
+import home.antlr4.XMLParserBaseListener;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.TokenStream;

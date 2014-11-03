@@ -1,14 +1,13 @@
-// Generated from /Users/cuong/IdeaProjects/JavaLab/AnnotationProcessorLab/src/main/resources/home.grammar/XMLLexer.g4 by ANTLR 4.4.1-dev
-package home.grammar;
-import org.antlr.v4.runtime.CharStream;
+// Generated from XMLLexer.g4 by ANTLR 4.3
+package home.antlr4;
 import org.antlr.v4.runtime.Lexer;
-import org.antlr.v4.runtime.RuleContext;
-import org.antlr.v4.runtime.RuntimeMetaData;
-import org.antlr.v4.runtime.atn.ATN;
-import org.antlr.v4.runtime.atn.ATNDeserializer;
-import org.antlr.v4.runtime.atn.LexerATNSimulator;
-import org.antlr.v4.runtime.atn.PredictionContextCache;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.TokenStream;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
+import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class XMLLexer extends Lexer {
@@ -71,6 +70,7 @@ public class XMLLexer extends Lexer {
 	public void action(RuleContext _localctx, int ruleIndex, int actionIndex) {
 		switch (ruleIndex) {
 		case 0: COMMENT_action((RuleContext)_localctx, actionIndex); break;
+
 		case 17: S_action((RuleContext)_localctx, actionIndex); break;
 		}
 	}

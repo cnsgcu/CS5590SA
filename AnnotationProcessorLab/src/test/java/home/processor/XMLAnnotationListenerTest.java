@@ -1,7 +1,7 @@
-package home.listener;
+package home.processor;
 
-import home.grammar.XMLLexer;
-import home.grammar.XMLParser;
+import home.antlr4.XMLLexer;
+import home.antlr4.XMLParser;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;

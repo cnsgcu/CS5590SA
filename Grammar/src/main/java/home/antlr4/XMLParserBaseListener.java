@@ -1,5 +1,5 @@
-// Generated from /Users/cuong/IdeaProjects/JavaLab/AnnotationProcessorLab/src/main/resources/home.grammar/XMLParser.g4 by ANTLR 4.4.1-dev
-package home.grammar;
+// Generated from XMLParser.g4 by ANTLR 4.3
+package home.antlr4;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -17,37 +17,14 @@ public class XMLParserBaseListener implements XMLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterContent(@NotNull XMLParser.ContentContext ctx) { }
+	@Override public void enterReference(@NotNull XMLParser.ReferenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitContent(@NotNull XMLParser.ContentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterElement(@NotNull XMLParser.ElementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitElement(@NotNull XMLParser.ElementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterProlog(@NotNull XMLParser.PrologContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitProlog(@NotNull XMLParser.PrologContext ctx) { }
+	@Override public void exitReference(@NotNull XMLParser.ReferenceContext ctx) { }
+
 	/**
 	 * {@inheritDoc}
 	 *
@@ -60,18 +37,7 @@ public class XMLParserBaseListener implements XMLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDocument(@NotNull XMLParser.DocumentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAttribute(@NotNull XMLParser.AttributeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAttribute(@NotNull XMLParser.AttributeContext ctx) { }
+
 	/**
 	 * {@inheritDoc}
 	 *
@@ -84,18 +50,59 @@ public class XMLParserBaseListener implements XMLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitChardata(@NotNull XMLParser.ChardataContext ctx) { }
+
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterReference(@NotNull XMLParser.ReferenceContext ctx) { }
+	@Override public void enterAttribute(@NotNull XMLParser.AttributeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitReference(@NotNull XMLParser.ReferenceContext ctx) { }
+	@Override public void exitAttribute(@NotNull XMLParser.AttributeContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterProlog(@NotNull XMLParser.PrologContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitProlog(@NotNull XMLParser.PrologContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterContent(@NotNull XMLParser.ContentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitContent(@NotNull XMLParser.ContentContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterElement(@NotNull XMLParser.ElementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElement(@NotNull XMLParser.ElementContext ctx) { }
+
 	/**
 	 * {@inheritDoc}
 	 *
