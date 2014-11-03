@@ -8,7 +8,7 @@ import org.antlr.v4.runtime.Recognizer;
 import java.util.Collections;
 import java.util.List;
 
-public class ErrorListener extends BaseErrorListener
+public class ErrorProcessor extends BaseErrorListener
 {
     @Override
     public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol,

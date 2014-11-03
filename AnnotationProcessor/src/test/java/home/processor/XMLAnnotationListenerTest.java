@@ -28,7 +28,7 @@ public class XMLAnnotationListenerTest
 
         final ParseTreeWalker walker = new ParseTreeWalker();
 
-        final XMLAnnotationListener pruner = new XMLAnnotationListener(tokens);
+        final XMLProcessor pruner = new XMLProcessor(tokens);
         walker.walk(pruner, tree);
     }
 }

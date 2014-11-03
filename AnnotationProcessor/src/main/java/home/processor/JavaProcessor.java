@@ -20,13 +20,13 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Consumer;
 
-public class JavaAnnotationListener extends JavaBaseListener
+public class JavaProcessor extends JavaBaseListener
 {
     final private TokenStream tokens;
     final private TokenStreamRewriter rewriter;
     final private Set<FeatureOpt> featureOptSet;
 
-    public JavaAnnotationListener(TokenStream tokens, FeatureOpt... featureOpts)
+    public JavaProcessor(TokenStream tokens, FeatureOpt... featureOpts)
     {
         this.tokens = tokens;
         this.rewriter = new TokenStreamRewriter(tokens);

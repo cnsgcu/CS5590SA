@@ -10,12 +10,12 @@ import org.antlr.v4.runtime.TokenStreamRewriter;
 
 import java.util.List;
 
-public class XMLAnnotationListener extends XMLParserBaseListener
+public class XMLProcessor extends XMLParserBaseListener
 {
     private TokenStream tokens;
     private TokenStreamRewriter rewriter;
 
-    public XMLAnnotationListener(TokenStream tokens)
+    public XMLProcessor(TokenStream tokens)
     {
         this.tokens = tokens;
         this.rewriter = new TokenStreamRewriter(tokens);

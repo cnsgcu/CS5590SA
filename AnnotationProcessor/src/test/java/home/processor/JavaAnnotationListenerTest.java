@@ -28,7 +28,7 @@ public class JavaAnnotationListenerTest
         final ParseTree tree = parser.compilationUnit();
 
         final ParseTreeWalker walker = new ParseTreeWalker();
-        final JavaAnnotationListener pruner = new JavaAnnotationListener(tokens, FeatureOpt.CHATTING);
+        final JavaProcessor pruner = new JavaProcessor(tokens, FeatureOpt.CHATTING);
         walker.walk(pruner, tree);
 
         System.out.println(pruner);
