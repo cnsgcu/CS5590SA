@@ -29,7 +29,8 @@
                 </executions>
                 <configuration>
                     <arguments>
-                        <argument>-package home.antlr4</argument>
+                        <argument>-package</argument>
+                        <argument>home.antlr4</argument>
                     </arguments>
                     <sourceDirectory>
                         ${basedir}/src/main/resources/home/grammar
