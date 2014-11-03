@@ -33,7 +33,7 @@ public class XMLAnnotationListenerTest
 
             System.out.println(pruner);
         } catch (IOException e) {
-            System.out.println(e.getStackTrace());
+            e.printStackTrace();
         }
     }
 }

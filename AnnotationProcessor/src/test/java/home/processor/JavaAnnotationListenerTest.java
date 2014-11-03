@@ -33,7 +33,7 @@ public class JavaAnnotationListenerTest
 
             System.out.println(pruner);
         } catch (IOException e) {
-            System.out.println(e.getStackTrace());
+            e.printStackTrace();
         }
     }
 }
