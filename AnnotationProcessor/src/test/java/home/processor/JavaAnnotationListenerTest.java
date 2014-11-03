@@ -14,23 +14,26 @@ import java.io.InputStream;
 
 public class JavaAnnotationListenerTest
 {
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args)
     {
-        final String file = "AnnotationProcessor/src/test/resources/home/sample/ClientArch.java";
-        final InputStream fileInput = new FileInputStream(file);
+        final String fileName = "AnnotationProcessor/src/test/resources/home/sample/ClientArch.java";
 
-        final ANTLRInputStream antIS = new ANTLRInputStream(fileInput);
+        try (final InputStream fileStream = new FileInputStream(fileName)) {
+            final ANTLRInputStream antIS = new ANTLRInputStream(fileStream);
 
-        final JavaLexer lexer = new JavaLexer(antIS);
-        final CommonTokenStream tokens = new CommonTokenStream(lexer);
+            final JavaLexer lexer = new JavaLexer(antIS);
+            final CommonTokenStream tokens = new CommonTokenStream(lexer);
 
-        final JavaParser parser = new JavaParser(tokens);
-        final ParseTree tree = parser.compilationUnit();
+            final JavaParser parser = new JavaParser(tokens);
+            final ParseTree tree = parser.compilationUnit();
 
-        final ParseTreeWalker walker = new ParseTreeWalker();
-        final JavaProcessor pruner = new JavaProcessor(tokens, FeatureOpt.CHATTING);
-        walker.walk(pruner, tree);
+            final ParseTreeWalker walker = new ParseTreeWalker();
+            final JavaProcessor pruner = new JavaProcessor(tokens, FeatureOpt.CHATTING);
+            walker.walk(pruner, tree);
 
-        System.out.println(pruner);
+            System.out.println(pruner);
+        } catch (IOException e) {
+            System.out.println(e.getStackTrace());
+        }
     }
 }

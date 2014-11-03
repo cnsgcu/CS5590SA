@@ -13,24 +13,27 @@ import java.io.InputStream;
 
 public class XMLAnnotationListenerTest
 {
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args)
     {
-        final String file = "AnnotationProcessor/src/test/resources/home/sample/arch.xml";
-        final InputStream fileInput = new FileInputStream(file);
+        final String fileName = "AnnotationProcessor/src/test/resources/home/sample/arch.xml";
 
-        final ANTLRInputStream antIS = new ANTLRInputStream(fileInput);
+        try (final InputStream fileStream = new FileInputStream(fileName)) {
+            final ANTLRInputStream antIS = new ANTLRInputStream(fileStream);
 
-        final XMLLexer lexer = new XMLLexer(antIS);
-        final CommonTokenStream tokens = new CommonTokenStream(lexer);
+            final XMLLexer lexer = new XMLLexer(antIS);
+            final CommonTokenStream tokens = new CommonTokenStream(lexer);
 
-        final XMLParser parser = new XMLParser(tokens);
-        final ParseTree tree = parser.document();
+            final XMLParser parser = new XMLParser(tokens);
+            final ParseTree tree = parser.document();
 
-        final ParseTreeWalker walker = new ParseTreeWalker();
+            final ParseTreeWalker walker = new ParseTreeWalker();
 
-        final XMLProcessor pruner = new XMLProcessor(tokens);
-        walker.walk(pruner, tree);
+            final XMLProcessor pruner = new XMLProcessor(tokens);
+            walker.walk(pruner, tree);
 
-        System.out.println(pruner);
+            System.out.println(pruner);
+        } catch (IOException e) {
+            System.out.println(e.getStackTrace());
+        }
     }
 }
