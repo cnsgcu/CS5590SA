@@ -30,5 +30,7 @@ public class XMLAnnotationListenerTest
 
         final XMLProcessor pruner = new XMLProcessor(tokens);
         walker.walk(pruner, tree);
+
+        System.out.println(pruner);
     }
 }

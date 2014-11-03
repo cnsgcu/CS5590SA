@@ -22,6 +22,12 @@ public class XMLProcessor extends XMLParserBaseListener
     }
 
     @Override
+    public String toString()
+    {
+        return rewriter.getText();
+    }
+
+    @Override
     public void exitElement(XMLParser.ElementContext ctx)
     {
         List<Token> tokenList =  ((CommonTokenStream) tokens).getHiddenTokensToLeft(
@@ -30,9 +36,7 @@ public class XMLProcessor extends XMLParserBaseListener
         );
 
         if (tokenList != null) {
-            for (Token token : tokenList) {
-                System.out.println(token.getText());
-            }
+            rewriter.delete(tokenList.get(0).getTokenIndex(), ctx.getStop().getTokenIndex());
         }
     }
 }
