@@ -42,7 +42,12 @@ public class JavaProcessor extends JavaBaseListener
     @Override
     public void exitImportDeclaration(JavaParser.ImportDeclarationContext ctx)
     {
-        pruneBlock(ctx, token -> rewriter.delete(token, ctx.getStop()));
+        if (Feature.class.getName().equals(ctx.getChild(1).getText())
+            || FeatureOpt.class.getName().equals(ctx.getChild(1).getText())) {
+            rewriter.delete(ctx.getStart(), ctx.getStop());
+        } else {
+            pruneBlock(ctx, token -> rewriter.delete(token, ctx.getStop()));
+        }
     }
 
     @Override
