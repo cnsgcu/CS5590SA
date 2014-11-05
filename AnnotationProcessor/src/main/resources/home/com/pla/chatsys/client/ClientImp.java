@@ -114,6 +114,7 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
         /*@Feature(FeatureOpt.FILE_SHARING)*/
 		addFileShareButton(topPanel);
 		addColorPickerButton(topPanel);
+        /*@Feature(FeatureOpt.GAME)*/
 		addTTTGameButton(topPanel);
 		addPrintButton(topPanel);
 		addPrivateButton(topPanel);
@@ -243,12 +244,12 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 		topPanel.add(printButton);
 	}
 
+    @Feature(FeatureOpt.GAME)
 	private void addTTTGameButton(JPanel topPanel) {
 		TTTButton = new JButton(new ImageIcon(IconPath + "TTT.png"));
 		TTTButton.setBackground(Color.WHITE);
 		TTTButton.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent arg0) {
-                /*@Feature(FeatureOpt.GAME)*/
                 _arch.OUT_IGame.startGame();
 			}
 		});
@@ -310,7 +311,7 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 			public void actionPerformed(ActionEvent e) {
 				URL connection;
 				try {
-					connection = new URL("http://checkip.amazonaws.com/");
+					connection = new conURL("http://checkip.amazonaws.com/");
 					URLConnection con = connection.openConnection();
 					String str = null;
 					String xml = null;

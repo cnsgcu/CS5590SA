@@ -1,4 +1,5 @@
 ## Directory-based project format
+.DS_Store
 .idea
 target/
 
