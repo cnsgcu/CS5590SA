@@ -33,8 +33,8 @@ public class XMLAnnotationListenerTest
             final XMLProcessor pruner = new XMLProcessor(tokens, FeatureOpt.FILE_SHARING);
             walker.walk(pruner, tree);
 
-            try (FileWriter fw = new java.io.FileWriter("AnnotationProcessor/src/test/resources/home/out/chat_pla.xml")) {
-                fw.write(pruner.toString());
+            try (FileWriter writer = new java.io.FileWriter("AnnotationProcessor/src/test/resources/home/out/chat_pla.xml")) {
+                writer.write(pruner.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }

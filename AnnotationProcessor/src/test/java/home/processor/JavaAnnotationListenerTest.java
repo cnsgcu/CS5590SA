@@ -32,8 +32,8 @@ public class JavaAnnotationListenerTest
             final JavaProcessor pruner = new JavaProcessor(tokens, FeatureOpt.FILE_SHARING);
             walker.walk(pruner, tree);
 
-            try (FileWriter fw = new java.io.FileWriter("AnnotationProcessor/src/test/resources/home/out/ClientImp.java")) {
-                fw.write(pruner.toString());
+            try (FileWriter writer = new java.io.FileWriter("AnnotationProcessor/src/test/resources/home/out/ClientImp.java")) {
+                writer.write(pruner.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
