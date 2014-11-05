@@ -151,7 +151,8 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 				transcript.setText(ChatHistory);
 			}
 		});
-		
+
+        /*@Feature(FeatureOpt.TEMPLATE)*/
 		template.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent arg0) {
 				TemplateGUI temp = new TemplateGUI();
@@ -636,6 +637,7 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 	}
 
 	@Override
+    @Feature(FeatureOpt.TEMPLATE)
 	public void sendTemplet(String sender, String code) {
 
 		String[] result = _arch.OUT_ITempletRetriver.getTemplet(code);

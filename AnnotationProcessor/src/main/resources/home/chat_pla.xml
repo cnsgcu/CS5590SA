@@ -188,6 +188,7 @@
                 </javaimplementation:mainClass>
             </implementation:implementation>
         </types:interfaceType>
+        <!-- template -->
         <types:interfaceType types:id="interfaceType7f000001-42184887-f245da59-afac03ad" xsi:type="implementation:InterfaceTypeImpl">
             <types:description xsi:type="instance:Description">sendTemplet</types:description>
             <implementation:implementation xsi:type="javaimplementation:JavaImplementation">
@@ -196,6 +197,7 @@
                 </javaimplementation:mainClass>
             </implementation:implementation>
         </types:interfaceType>
+        <!-- template -->
         <types:interfaceType types:id="interfaceType7f000001-421896ce-b285d2ee-afac03ae" xsi:type="implementation:InterfaceTypeImpl">
             <types:description xsi:type="instance:Description">TempletSend</types:description>
             <implementation:implementation xsi:type="javaimplementation:JavaImplementation">
@@ -406,6 +408,7 @@
                     </options:guard>
                 </options:optional>
             </types:interface>
+            <!-- template -->
             <types:interface types:id="interface7f000001-421f7067-1aefc9de-afac040e" xsi:type="options:OptionalInterface">
                 <types:description xsi:type="instance:Description">[New Interface]</types:description>
                 <types:direction xsi:type="instance:Direction">in</types:direction>
@@ -421,6 +424,7 @@
                     </options:guard>
                 </options:optional>
             </types:interface>
+            <!-- template -->
             <types:interface types:id="interface7f000001-4220d598-afe6c23f-afac04b1" xsi:type="options:OptionalInterface">
                 <types:description xsi:type="instance:Description">[New Interface]</types:description>
                 <types:direction xsi:type="instance:Direction">out</types:direction>
@@ -669,6 +673,7 @@
                     </options:guard>
                 </options:optional>
             </types:interface>
+            <!-- template -->
             <types:interface types:id="interface7f000001-421eeaff-efc5319e-afac03cb" xsi:type="options:OptionalInterface">
                 <types:description xsi:type="instance:Description">sendtemplet</types:description>
                 <types:direction xsi:type="instance:Direction">out</types:direction>
@@ -684,6 +689,7 @@
                     </options:guard>
                 </options:optional>
             </types:interface>
+            <!-- template -->
             <types:interface types:id="interface7f000001-42216f18-f5a343c5-afac0502" xsi:type="options:OptionalInterface">
                 <types:description xsi:type="instance:Description">templetsend</types:description>
                 <types:direction xsi:type="instance:Direction">in</types:direction>
@@ -729,6 +735,7 @@
                     </options:guard>
                 </options:optional>
             </types:interface>
+            <!-- template -->
             <types:interface types:id="interfaceffffff83-61063570-ed972e3c-85510329" xsi:type="options:OptionalInterface">
                 <types:description xsi:type="instance:Description">gettemplet</types:description>
                 <types:direction xsi:type="instance:Direction">out</types:direction>
@@ -966,6 +973,7 @@
                     </options:guard>
                 </options:optional>
             </types:interface>
+            <!-- template -->
             <types:interface types:id="interface7f000001-421f2ec7-2616e635-afac03ec" xsi:type="options:OptionalInterface">
                 <types:description xsi:type="instance:Description">[New Interface]</types:description>
                 <types:direction xsi:type="instance:Direction">out</types:direction>
@@ -981,6 +989,7 @@
                     </options:guard>
                 </options:optional>
             </types:interface>
+            <!-- template -->
             <types:interface types:id="interface7f000001-42212bd8-618217f5-afac04e0" xsi:type="options:OptionalInterface">
                 <types:description xsi:type="instance:Description">[New Interface]</types:description>
                 <types:direction xsi:type="instance:Direction">in</types:direction>
@@ -1026,6 +1035,7 @@
                     </options:guard>
                 </options:optional>
             </types:interface>
+            <!-- template -->
             <types:interface types:id="interfaceffffff83-61066ce0-e9129a66-85510349" xsi:type="options:OptionalInterface">
                 <types:description xsi:type="instance:Description">[New Interface]</types:description>
                 <types:direction xsi:type="instance:Direction">out</types:direction>
@@ -1343,6 +1353,7 @@
                 </options:guard>
             </options:optional>
         </types:component>
+        <!-- template -->
         <types:component types:id="component7f000001-42226c93-f97993d8-afac054d" xsi:type="options:OptionalComponent">
             <types:description xsi:type="instance:Description">Templet</types:description>
             <types:interface types:id="interface7f000001-4222c190-a1001b83-afac0570" xsi:type="options:OptionalInterface">
@@ -1476,6 +1487,7 @@
                 </options:guard>
             </options:optional>
         </types:connector>
+        <!-- template -->
         <types:connector types:id="connector7f000001-42205ff1-08a8948c-afac0452" xsi:type="options:OptionalConnector">
             <types:description xsi:type="instance:Description">Templet pump</types:description>
             <types:interface types:id="interface7f000001-42205ff2-83576fe5-afac0453" xsi:type="types:Interface">
@@ -2023,6 +2035,7 @@
                 </options:guard>
             </options:optional>
         </types:link>
+        <!-- template -->
         <types:link types:id="link7f000001-421ff697-a0663f96-afac0416" xsi:type="options:OptionalLink">
             <types:description xsi:type="instance:Description">[New Link]</types:description>
             <types:point xsi:type="instance:Point">
@@ -2042,6 +2055,7 @@
                 </options:guard>
             </options:optional>
         </types:link>
+        <!-- template -->
         <types:link types:id="link7f000001-422015a7-9a2bf03e-afac0427" xsi:type="options:OptionalLink">
             <types:description xsi:type="instance:Description">[New Link]</types:description>
             <types:point xsi:type="instance:Point">
@@ -2061,6 +2075,7 @@
                 </options:guard>
             </options:optional>
         </types:link>
+        <!-- template -->
         <types:link types:id="link7f000001-422104a1-de98d94d-afac04b9" xsi:type="options:OptionalLink">
             <types:description xsi:type="instance:Description">[New Link]</types:description>
             <types:point xsi:type="instance:Point">
@@ -2080,6 +2095,7 @@
                 </options:guard>
             </options:optional>
         </types:link>
+        <!-- template -->
         <types:link types:id="link7f000001-4221aaf4-80936079-afac050b" xsi:type="options:OptionalLink">
             <types:description xsi:type="instance:Description">[New Link]</types:description>
             <types:point xsi:type="instance:Point">
@@ -2099,6 +2115,7 @@
                 </options:guard>
             </options:optional>
         </types:link>
+        <!-- template -->
         <types:link types:id="link7f000001-4221d8eb-c3dc2901-afac051b" xsi:type="options:OptionalLink">
             <types:description xsi:type="instance:Description">[New Link]</types:description>
             <types:point xsi:type="instance:Point">
@@ -2118,6 +2135,7 @@
                 </options:guard>
             </options:optional>
         </types:link>
+        <!-- template -->
         <types:link types:id="link7f000001-42230de4-a0e1fdf4-afac057a" xsi:type="options:OptionalLink">
             <types:description xsi:type="instance:Description">[New Link]</types:description>
             <types:point xsi:type="instance:Point">
@@ -2233,6 +2251,7 @@
                 </options:guard>
             </options:optional>
         </types:link>
+        <!-- template -->
         <types:link types:id="linkffffff83-61072a88-0798835b-85510392" xsi:type="options:OptionalLink">
             <types:description xsi:type="instance:Description">[New Link]</types:description>
             <types:point xsi:type="instance:Point">
@@ -5765,6 +5784,7 @@
                 <features:archElement xlink:href="#linkffffffcf-41a8c39b-0f1239bc-d59f03b7" xlink:type="simple" xsi:type="instance:XMLLink"/>
             </features:featureElements>
         </features:feature>
+        <!-- template -->
         <features:feature features:id="feature7f000001-42165986-826081ee-afac03a7" xsi:type="features:Feature">
             <features:description xsi:type="instance:Description">Templet</features:description>
             <features:displayOptions features:id="displayOptions7f000001-42165988-9fe2b86a-afac03a8" xsi:type="features:DisplayOptions">

@@ -136,6 +136,7 @@ public class ServerImp implements IServerImp
 	}
 
 	@Override
+    @Feature(FeatureOpt.TEMPLATE)
 	public void sendTemplet(String sender, String msgCode) {
 		_arch.OUT_ITempletSend.sendTemplet(sender, msgCode);
 	}
