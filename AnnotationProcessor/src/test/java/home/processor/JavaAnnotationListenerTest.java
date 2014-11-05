@@ -17,7 +17,19 @@ public class JavaAnnotationListenerTest
 {
     public static void main(String[] args)
     {
-        final String fileName = "AnnotationProcessor/src/main/resources/home/com/pla/chatsys/server/ServerImp.java";
+        process(
+            "AnnotationProcessor/src/main/resources/home/com/pla/chatsys/client/ClientImp.java",
+            "AnnotationProcessor/src/test/resources/home/out/ClientImp.java"
+        );
+
+        process(
+            "AnnotationProcessor/src/main/resources/home/com/pla/chatsys/server/ServerImp.java",
+            "AnnotationProcessor/src/test/resources/home/out/ServerImp.java"
+        );
+    }
+
+    private static void process(String in, String out) {
+        final String fileName = in;
 
         try (final InputStream fileStream = new FileInputStream(fileName)) {
             final ANTLRInputStream antIS = new ANTLRInputStream(fileStream);
@@ -29,10 +41,10 @@ public class JavaAnnotationListenerTest
             final ParseTree tree = parser.compilationUnit();
 
             final ParseTreeWalker walker = new ParseTreeWalker();
-            final JavaProcessor pruner = new JavaProcessor(tokens, FeatureOpt.TEMPLATE);
+            final JavaProcessor pruner = new JavaProcessor(tokens, FeatureOpt.CHAT_HISTORY);
             walker.walk(pruner, tree);
 
-            try (FileWriter writer = new java.io.FileWriter("AnnotationProcessor/src/test/resources/home/out/ServerImp.java")) {
+            try (FileWriter writer = new FileWriter(out)) {
                 writer.write(pruner.toString());
             } catch (IOException e) {
                 e.printStackTrace();

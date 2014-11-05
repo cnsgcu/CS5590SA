@@ -140,6 +140,7 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 		bottomPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		bottomPanel.add(entryField);
 		bottomPanel.add(sendButton);
+        /*@Feature(FeatureOpt.CHAT_HISTORY)*/
 		bottomPanel.add(loadButton);
 		bottomPanel.add(template);
 		bottomPanel.add(ImageButton);
