@@ -104,6 +104,7 @@ public class ServerImp implements IServerImp
 	}
 
 	@Override
+    @Feature(FeatureOpt.IMAGE_SHARING)
 	public void sendImage(String sender, String name, byte[] data) {
 		if(_arch.OUT_IImageSent !=null){
 			_arch.OUT_IImageSent.imageSent(sender, name, data);

@@ -134,6 +134,7 @@
                 </javaimplementation:mainClass>
             </implementation:implementation>
         </types:interfaceType>
+        <!-- image_sharing -->
         <types:interfaceType types:id="interfaceTypeffa8010b-37dcd1da-6b3449e3-362606a0" xsi:type="implementation:InterfaceTypeImpl">
             <types:description xsi:type="instance:Description">SendImage</types:description>
             <implementation:implementation xsi:type="javaimplementation:JavaImplementation">
@@ -142,6 +143,7 @@
                 </javaimplementation:mainClass>
             </implementation:implementation>
         </types:interfaceType>
+        <!-- image_sharing -->
         <types:interfaceType types:id="interfaceTypeffa8010b-37dd14c9-c94b8ebc-362606a1" xsi:type="implementation:InterfaceTypeImpl">
             <types:description xsi:type="instance:Description">ImageSent</types:description>
             <implementation:implementation xsi:type="javaimplementation:JavaImplementation">
@@ -340,6 +342,7 @@
                 <types:type xlink:href="#interfaceTypeffa8010b-2206238a-435368a6-362600c2" xlink:type="simple" xsi:type="instance:XMLLink"/>
                 <options:optional xsi:type="options:Optional"/>
             </types:interface>
+            <!-- image_sharing -->
             <types:interface types:id="interfaceffa8010b-37e2af3c-8031f1d4-36260701" xsi:type="options:OptionalInterface">
                 <types:description xsi:type="instance:Description">[New Interface]</types:description>
                 <types:direction xsi:type="instance:Direction">in</types:direction>
@@ -355,6 +358,7 @@
                     </options:guard>
                 </options:optional>
             </types:interface>
+            <!-- image_sharing -->
             <types:interface types:id="interfaceffa8010b-37e3ed13-de7af4e2-36260776" xsi:type="options:OptionalInterface">
                 <types:description xsi:type="instance:Description">[New Interface]</types:description>
                 <types:direction xsi:type="instance:Direction">out</types:direction>
@@ -569,6 +573,7 @@
                 <types:type xlink:href="#interfaceTypeffa8010b-2206238a-435368a6-362600c2" xlink:type="simple" xsi:type="instance:XMLLink"/>
                 <options:optional xsi:type="options:Optional"/>
             </types:interface>
+            <!-- image_sharing -->
             <types:interface types:id="interfaceffa8010b-37e1ce26-e1d56ee4-362606bf" xsi:type="options:OptionalInterface">
                 <types:description xsi:type="instance:Description">sendImage</types:description>
                 <types:direction xsi:type="instance:Direction">out</types:direction>
@@ -584,6 +589,7 @@
                     </options:guard>
                 </options:optional>
             </types:interface>
+            <!-- image_sharing -->
             <types:interface types:id="interfaceffa8010b-37e52ae1-c282617a-362607ca" xsi:type="options:OptionalInterface">
                 <types:description xsi:type="instance:Description">imagesent</types:description>
                 <types:direction xsi:type="instance:Direction">in</types:direction>
@@ -864,6 +870,7 @@
                 <types:type xlink:href="#interfaceTypeffa8010b-2206238a-435368a6-362600c2" xlink:type="simple" xsi:type="instance:XMLLink"/>
                 <options:optional xsi:type="options:Optional"/>
             </types:interface>
+            <!-- image_sharing -->
             <types:interface types:id="interfaceffa8010b-37e23a5c-d71bb5be-362606e0" xsi:type="options:OptionalInterface">
                 <types:description xsi:type="instance:Description">[New Interface]</types:description>
                 <types:direction xsi:type="instance:Direction">out</types:direction>
@@ -879,6 +886,7 @@
                     </options:guard>
                 </options:optional>
             </types:interface>
+            <!-- image_sharing -->
             <types:interface types:id="interfaceffa8010b-37e4a897-1aa76d92-362607a9" xsi:type="options:OptionalInterface">
                 <types:description xsi:type="instance:Description">[New Interface]</types:description>
                 <types:direction xsi:type="instance:Direction">in</types:direction>
@@ -1414,6 +1422,7 @@
                 </options:guard>
             </options:optional>
         </types:connector>
+        <!-- image_sharing -->
         <types:connector types:id="connectorffa8010b-37e38763-ef79f9bd-3626072f" xsi:type="options:OptionalConnector">
             <types:description xsi:type="instance:Description">ImagePunm</types:description>
             <types:interface types:id="interfaceffa8010b-37e38763-21c3e5a2-36260730" xsi:type="types:Interface">
@@ -1690,6 +1699,7 @@
             </types:point>
             <options:optional xsi:type="options:Optional"/>
         </types:link>
+        <!-- image_sharing -->
         <types:link types:id="linkffa8010b-37e2ea2b-8b9b6673-36260709" xsi:type="options:OptionalLink">
             <types:description xsi:type="instance:Description">[New Link]</types:description>
             <types:point xsi:type="instance:Point">
@@ -1709,6 +1719,7 @@
                 </options:guard>
             </options:optional>
         </types:link>
+        <!-- image_sharing -->
         <types:link types:id="linkffa8010b-37e320ba-eb488484-36260717" xsi:type="options:OptionalLink">
             <types:description xsi:type="instance:Description">[New Link]</types:description>
             <types:point xsi:type="instance:Point">
@@ -1728,6 +1739,7 @@
                 </options:guard>
             </options:optional>
         </types:link>
+        <!-- image_sharing -->
         <types:link types:id="linkffa8010b-37e45c1a-406530c5-36260781" xsi:type="options:OptionalLink">
             <types:description xsi:type="instance:Description">[New Link]</types:description>
             <types:point xsi:type="instance:Point">
@@ -1747,6 +1759,7 @@
                 </options:guard>
             </options:optional>
         </types:link>
+        <!-- image_sharing -->
         <types:link types:id="linkffa8010b-37e57211-3b2a7b0c-362607d2" xsi:type="options:OptionalLink">
             <types:description xsi:type="instance:Description">[New Link]</types:description>
             <types:point xsi:type="instance:Point">
@@ -1766,6 +1779,7 @@
                 </options:guard>
             </options:optional>
         </types:link>
+        <!-- image_sharing -->
         <types:link types:id="linkffa8010b-37e5a2a7-6df43290-362607e0" xsi:type="options:OptionalLink">
             <types:description xsi:type="instance:Description">[New Link]</types:description>
             <types:point xsi:type="instance:Point">
@@ -5671,6 +5685,7 @@
 
 </features:featureElements>
         </features:feature>
+        <!-- image_sharing -->
         <features:feature features:id="featureffa8010b-37da3c0a-96e43c17-3626069b" xsi:type="features:Feature">
             <features:description xsi:type="instance:Description">SendImage</features:description>
             <features:displayOptions features:id="displayOptionsffa8010b-37da3c0b-843c1605-3626069c" xsi:type="features:DisplayOptions">

@@ -164,7 +164,8 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 				});
 			}
 		});
-		
+
+        /*@Feature(FeatureOpt.IMAGE_SHARING)*/
 		ImageButton.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent arg0) {
 				JFileChooser fileChooser = new JFileChooser();
@@ -311,7 +312,7 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 			public void actionPerformed(ActionEvent e) {
 				URL connection;
 				try {
-					connection = new conURL("http://checkip.amazonaws.com/");
+					connection = new URL("http://checkip.amazonaws.com/");
 					URLConnection con = connection.openConnection();
 					String str = null;
 					String xml = null;
@@ -538,6 +539,7 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 		return b;
 	}
 
+    @Feature({FeatureOpt.FILE_SHARING, FeatureOpt.IMAGE_SHARING})
 	private void saveFile(String strFilePath, byte[] fileData) {
 
 		try {
@@ -554,6 +556,7 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 	}
 
 	@Override
+    @Feature(FeatureOpt.IMAGE_SHARING)
 	public void imageSent(String sender, String imageName, byte[] imageData) {
 		try {
 			saveFile(filePath + imageName, imageData);
@@ -565,15 +568,15 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 		messageSent(sender, imgtag);
 	}
 
-    @Feature(FeatureOpt.GAME)
 	@Override
+    @Feature(FeatureOpt.GAME)
 	public void gameStarted() {
 		_arch.OUT_ITTT.startTTT(f.getLocationOnScreen().x,
 				f.getLocationOnScreen().y - 100);
 	}
 
-    @Feature(FeatureOpt.GAME)
 	@Override
+    @Feature(FeatureOpt.GAME)
 	public void gameEnded() {
 		_arch.OUT_ITTT.endTTT();
 	}
@@ -586,14 +589,14 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 		}
 	}
 
-    @Feature(FeatureOpt.GAME)
 	@Override
+    @Feature(FeatureOpt.GAME)
 	public void myMove(int position) {
 		_arch.OUT_IGame.play(getTitle(), position);
 	}
 
-    @Feature(FeatureOpt.GAME)
 	@Override
+    @Feature(FeatureOpt.GAME)
 	public void quit() {
 		_arch.OUT_IGame.endGame();
 	}
