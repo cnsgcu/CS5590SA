@@ -30,7 +30,7 @@ public class XMLAnnotationListenerTest
 
             final ParseTreeWalker walker = new ParseTreeWalker();
 
-            final XMLProcessor pruner = new XMLProcessor(tokens, FeatureOpt.CHAT_HISTORY);
+            final XMLProcessor pruner = new XMLProcessor(tokens, FeatureOpt.IMAGE_SHARING);
             walker.walk(pruner, tree);
 
             try (FileWriter writer = new java.io.FileWriter("AnnotationProcessor/src/test/resources/home/out/chat_pla.xml")) {

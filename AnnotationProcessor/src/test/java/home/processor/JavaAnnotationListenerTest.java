@@ -28,10 +28,8 @@ public class JavaAnnotationListenerTest
         );
     }
 
-    private static void process(String in, String out) {
-        final String fileName = in;
-
-        try (final InputStream fileStream = new FileInputStream(fileName)) {
+    private static void process(String fin, String fout) {
+        try (final InputStream fileStream = new FileInputStream(fin)) {
             final ANTLRInputStream antIS = new ANTLRInputStream(fileStream);
 
             final JavaLexer lexer = new JavaLexer(antIS);
@@ -41,10 +39,10 @@ public class JavaAnnotationListenerTest
             final ParseTree tree = parser.compilationUnit();
 
             final ParseTreeWalker walker = new ParseTreeWalker();
-            final JavaProcessor pruner = new JavaProcessor(tokens, FeatureOpt.CHAT_HISTORY);
+            final JavaProcessor pruner = new JavaProcessor(tokens, FeatureOpt.IMAGE_SHARING);
             walker.walk(pruner, tree);
 
-            try (FileWriter writer = new FileWriter(out)) {
+            try (FileWriter writer = new FileWriter(fout)) {
                 writer.write(pruner.toString());
             } catch (IOException e) {
                 e.printStackTrace();
