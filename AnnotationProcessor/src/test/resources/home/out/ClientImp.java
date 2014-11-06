@@ -1,6 +1,6 @@
 package com.pla.chatsys.client;
 
-import home.annotation.Feature;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -41,7 +41,7 @@ import javax.swing.JTextField;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import home.annotation.FeatureOpt;
+
 import org.w3c.dom.CharacterData;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -111,10 +111,10 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 		
 		addSettingButton(topPanel);
 		addTrackButton(topPanel);
-        /*@Feature(FeatureOpt.FILE_SHARING)*/
+        
 		addFileShareButton(topPanel);
 		addColorPickerButton(topPanel);
-        /*@Feature(FeatureOpt.GAME)*/
+        
 		addTTTGameButton(topPanel);
 		addPrintButton(topPanel);
 		addPrivateButton(topPanel);
@@ -143,15 +143,9 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 		bottomPanel.add(template);
 		bottomPanel.add(ImageButton);
 
-        /*@Feature(FeatureOpt.CHAT_HISTORY)*/
-		loadButton.addActionListener(new ActionListener() {
-			@Override public void actionPerformed(ActionEvent e) {
-				String ChatHistory = _arch.OUT_IHistoryRetrive.retriveChatHistory(getTitle());
-				transcript.setText(ChatHistory);
-			}
-		});
+        
 
-        /*@Feature(FeatureOpt.TEMPLATE)*/
+        
 		template.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent arg0) {
 				TemplateGUI temp = new TemplateGUI();
@@ -165,7 +159,7 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 			}
 		});
 
-        /*@Feature(FeatureOpt.IMAGE_SHARING)*/
+        
 		ImageButton.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent arg0) {
 				JFileChooser fileChooser = new JFileChooser();
@@ -245,7 +239,7 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 		topPanel.add(printButton);
 	}
 
-    @Feature(FeatureOpt.GAME)
+    
 	private void addTTTGameButton(JPanel topPanel) {
 		TTTButton = new JButton(new ImageIcon(IconPath + "TTT.png"));
 		TTTButton.setBackground(Color.WHITE);
@@ -275,7 +269,7 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 		topPanel.add(colorButton);
 	}
 
-    @Feature(FeatureOpt.FILE_SHARING)
+    
 	private void addFileShareButton(JPanel topPanel) {
 		fileButton = new JButton("Send File");
 		fileButton = new JButton(new ImageIcon(IconPath + "SendFile.png"));
@@ -501,7 +495,7 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 	}
 
 	@Override
-    @Feature(FeatureOpt.FILE_SHARING)
+    
 	public void fileSent(String sender, String fileName, byte[] fileData) {
 		if (!sender.equals(this.getTitle())) {
 
@@ -516,7 +510,7 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 
 	}
 
-    @Feature({FeatureOpt.FILE_SHARING, FeatureOpt.IMAGE_SHARING})
+    
 	private byte[] getBytes(java.io.File file) {
 		byte[] b = new byte[(int) file.length()];
 		FileInputStream fileInputStream = null;
@@ -539,7 +533,7 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 		return b;
 	}
 
-    @Feature({FeatureOpt.FILE_SHARING, FeatureOpt.IMAGE_SHARING})
+    
 	private void saveFile(String strFilePath, byte[] fileData) {
 
 		try {
@@ -556,7 +550,7 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 	}
 
 	@Override
-    @Feature(FeatureOpt.IMAGE_SHARING)
+    
 	public void imageSent(String sender, String imageName, byte[] imageData) {
 		try {
 			saveFile(filePath + imageName, imageData);
@@ -569,19 +563,19 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 	}
 
 	@Override
-    @Feature(FeatureOpt.GAME)
+    
 	public void gameStarted() {
 		_arch.OUT_ITTT.startTTT(f.getLocationOnScreen().x,
 				f.getLocationOnScreen().y - 100);
 	}
 
 	@Override
-    @Feature(FeatureOpt.GAME)
+    
 	public void gameEnded() {
 		_arch.OUT_ITTT.endTTT();
 	}
 
-    @Feature(FeatureOpt.GAME)
+    
 	@Override
 	public void played(String sender, int position) {
 		if (!sender.equals(getTitle())) {
@@ -590,13 +584,13 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 	}
 
 	@Override
-    @Feature(FeatureOpt.GAME)
+    
 	public void myMove(int position) {
 		_arch.OUT_IGame.play(getTitle(), position);
 	}
 
 	@Override
-    @Feature(FeatureOpt.GAME)
+    
 	public void quit() {
 		_arch.OUT_IGame.endGame();
 	}
@@ -636,7 +630,7 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 	}
 
 	@Override
-    @Feature(FeatureOpt.TEMPLATE)
+    
 	public void sendTemplet(String sender, String code) {
 
 		String[] result = _arch.OUT_ITempletRetriver.getTemplet(code);
