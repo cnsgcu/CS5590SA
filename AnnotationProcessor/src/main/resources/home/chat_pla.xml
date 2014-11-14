@@ -206,6 +206,7 @@
                 </javaimplementation:mainClass>
             </implementation:implementation>
         </types:interfaceType>
+        <!-- template -->
         <types:interfaceType types:id="interfaceType7f000001-4218babf-3db32e83-afac03af" xsi:type="implementation:InterfaceTypeImpl">
             <types:description xsi:type="instance:Description">GetTemplet</types:description>
             <implementation:implementation xsi:type="javaimplementation:JavaImplementation">

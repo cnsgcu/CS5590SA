@@ -49,8 +49,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+/*@Feature(FeatureOpt.TEMPLATE)*/
 import comp.Templet.TemplateGUI;
+/*@Feature(FeatureOpt.TEMPLATE)*/
 import comp.Templet.TemplateGUI.SelectInterfce;
+/*@Feature(FeatureOpt.TEMPLATE)*/
 import comp.Templet.TempletSelector;
 
 public class ClientImp extends JFrame implements ActionListener, IClientImp {
@@ -113,6 +116,7 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 		addTrackButton(topPanel);
 		addFileShareButton(topPanel);
 		addColorPickerButton(topPanel);
+        /*@Feature(FeatureOpt.GAME)*/
 		addTTTGameButton(topPanel);
 		addPrintButton(topPanel);
 		addPrivateButton(topPanel);

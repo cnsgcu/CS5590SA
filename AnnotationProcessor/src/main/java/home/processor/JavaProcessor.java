@@ -14,11 +14,9 @@ import org.antlr.v4.runtime.TokenStreamRewriter;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.function.Consumer;
 
 public class JavaProcessor extends JavaBaseListener
 {
@@ -40,76 +38,45 @@ public class JavaProcessor extends JavaBaseListener
     }
 
     @Override
-    public void exitImportDeclaration(JavaParser.ImportDeclarationContext ctx)
+    public void exitImportDeclaration(final JavaParser.ImportDeclarationContext ctx)
     {
         if (Feature.class.getName().equals(ctx.getChild(1).getText())
             || FeatureOpt.class.getName().equals(ctx.getChild(1).getText())) {
             rewriter.delete(ctx.getStart(), ctx.getStop());
         } else {
-            pruneBlock(ctx, token -> rewriter.delete(token, ctx.getStop()));
-        }
-    }
-
-    @Override
-    public void exitStatement(JavaParser.StatementContext ctx)
-    {
-        pruneBlock(ctx, token -> rewriter.delete(token, ctx.getStop()));
-    }
-
-    @Override
-    public void exitSuperclass(JavaParser.SuperclassContext ctx)
-    {
-        pruneBlock((ParserRuleContext) ctx.getChild(1), token -> rewriter.delete(ctx.getStart(), ctx.getStop()));
-    }
-
-    @Override
-    public void exitSuperinterfaces(JavaParser.SuperinterfacesContext ctx)
-    {
-        List<ParseTree> keepInterfaceTypes = new LinkedList<>();
-
-        for (ParseTree child : ((ParserRuleContext) ctx.getChild(1)).children) {
-            if (child instanceof ParserRuleContext) {
-                final ParserRuleContext ruleContext = (ParserRuleContext) child;
-
-                final List<Token> leftHiddenTokens = ((CommonTokenStream) tokens).getHiddenTokensToLeft(
-                    ruleContext.getStart().getTokenIndex(),
-                    JavaLexer.COMMENT_CHANNEL
-                );
-
-                if (leftHiddenTokens != null) {
-                    for (Token hiddenToken : leftHiddenTokens) {
-                        final String htText = hiddenToken.getText();
-                        final ANTLRInputStream htInputStream = new ANTLRInputStream(
-                            htText.substring(2, htText.length() - 2)
-                        );
-
-                        final JavaLexer htLexer = new JavaLexer(htInputStream);
-                        final CommonTokenStream hiddenTokenStream = new CommonTokenStream(htLexer);
-
-                        final JavaParser htParser = new JavaParser(hiddenTokenStream);
-                        final JavaParser.AnnotationContext annotationCtx = htParser.annotation();
-
-                        if (!isPruneAnnotation(annotationCtx)) {
-                            keepInterfaceTypes.add(child);
-                            break;
-                        }
+            pruneBlock(
+                ctx,
+                new Consumer<Token>() {
+                    @Override
+                    public void accept(Token token) {
+                        rewriter.delete(token, ctx.getStop());
                     }
-                } else {
-                    keepInterfaceTypes.add(child);
+            });
+        }
+    }
+
+    @Override
+    public void exitStatement(final JavaParser.StatementContext ctx)
+    {
+        pruneBlock(
+            ctx,
+            new Consumer<Token>() {
+                @Override
+                public void accept(Token token) {
+                    rewriter.delete(token, ctx.getStop());
                 }
+        });
+    }
+
+    @Override
+    public void exitSuperclass(final JavaParser.SuperclassContext ctx)
+    {
+        pruneBlock((ParserRuleContext) ctx.getChild(1), new Consumer<Token>() {
+            @Override
+            public void accept(Token token) {
+                rewriter.delete(ctx.getStart(), ctx.getStop());
             }
-        }
-
-        if (keepInterfaceTypes.isEmpty()) {
-            rewriter.delete(ctx.getStart(), ctx.getStop());
-        } else {
-            String interfaceList = keepInterfaceTypes.stream()
-                .map(ParseTree::getText)
-                .reduce((il, ir) -> il + ", " + ir)
-                .orElse("");
-
-            rewriter.replace(ctx.getStart(), ctx.getStop(), ctx.children.get(0).getText() + " " + interfaceList);
-        }
+        });
     }
 
     @Override

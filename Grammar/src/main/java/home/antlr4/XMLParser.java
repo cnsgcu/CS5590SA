@@ -17,9 +17,9 @@ public class XMLParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		SEA_WS=6, EQUALS=14, SPECIAL_CLOSE=11, SLASH=13, TEXT=9, CLOSE=10, COMMENT=1, 
-		OPEN=7, Name=16, SLASH_CLOSE=12, S=17, DTD=3, CharRef=5, XMLDeclOpen=8, 
-		STRING=15, PI=18, CDATA=2, EntityRef=4;
+		OPEN=7, CDATA=2, SLASH=13, CharRef=5, SEA_WS=6, SPECIAL_CLOSE=11, CLOSE=10, 
+		DTD=3, Name=16, EQUALS=14, PI=18, S=17, SLASH_CLOSE=12, TEXT=9, COMMENT=1, 
+		XMLDeclOpen=8, EntityRef=4, STRING=15;
 	public static final String[] tokenNames = {
 		"<INVALID>", "COMMENT", "CDATA", "DTD", "EntityRef", "CharRef", "SEA_WS", 
 		"'<'", "XMLDeclOpen", "TEXT", "'>'", "SPECIAL_CLOSE", "'/>'", "'/'", "'='", 
@@ -53,9 +53,6 @@ public class XMLParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 	public static class DocumentContext extends ParserRuleContext {
-		public MiscContext misc(int i) {
-			return getRuleContext(MiscContext.class,i);
-		}
 		public ElementContext element() {
 			return getRuleContext(ElementContext.class,0);
 		}
@@ -64,6 +61,9 @@ public class XMLParser extends Parser {
 		}
 		public PrologContext prolog() {
 			return getRuleContext(PrologContext.class,0);
+		}
+		public MiscContext misc(int i) {
+			return getRuleContext(MiscContext.class,i);
 		}
 		public DocumentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -135,10 +135,10 @@ public class XMLParser extends Parser {
 	}
 
 	public static class PrologContext extends ParserRuleContext {
+		public TerminalNode SPECIAL_CLOSE() { return getToken(XMLParser.SPECIAL_CLOSE, 0); }
 		public List<AttributeContext> attribute() {
 			return getRuleContexts(AttributeContext.class);
 		}
-		public TerminalNode SPECIAL_CLOSE() { return getToken(XMLParser.SPECIAL_CLOSE, 0); }
 		public AttributeContext attribute(int i) {
 			return getRuleContext(AttributeContext.class,i);
 		}
@@ -193,32 +193,32 @@ public class XMLParser extends Parser {
 	}
 
 	public static class ContentContext extends ParserRuleContext {
-		public TerminalNode CDATA(int i) {
-			return getToken(XMLParser.CDATA, i);
-		}
+		public List<TerminalNode> PI() { return getTokens(XMLParser.PI); }
+		public List<TerminalNode> CDATA() { return getTokens(XMLParser.CDATA); }
 		public List<ElementContext> element() {
 			return getRuleContexts(ElementContext.class);
-		}
-		public List<ChardataContext> chardata() {
-			return getRuleContexts(ChardataContext.class);
-		}
-		public List<TerminalNode> PI() { return getTokens(XMLParser.PI); }
-		public List<ReferenceContext> reference() {
-			return getRuleContexts(ReferenceContext.class);
 		}
 		public TerminalNode PI(int i) {
 			return getToken(XMLParser.PI, i);
 		}
-		public ChardataContext chardata(int i) {
-			return getRuleContext(ChardataContext.class,i);
-		}
 		public ElementContext element(int i) {
 			return getRuleContext(ElementContext.class,i);
+		}
+		public TerminalNode CDATA(int i) {
+			return getToken(XMLParser.CDATA, i);
 		}
 		public ReferenceContext reference(int i) {
 			return getRuleContext(ReferenceContext.class,i);
 		}
-		public List<TerminalNode> CDATA() { return getTokens(XMLParser.CDATA); }
+		public ChardataContext chardata(int i) {
+			return getRuleContext(ChardataContext.class,i);
+		}
+		public List<ChardataContext> chardata() {
+			return getRuleContexts(ChardataContext.class);
+		}
+		public List<ReferenceContext> reference() {
+			return getRuleContexts(ReferenceContext.class);
+		}
 		public ContentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -314,11 +314,11 @@ public class XMLParser extends Parser {
 		public List<AttributeContext> attribute() {
 			return getRuleContexts(AttributeContext.class);
 		}
-		public ContentContext content() {
-			return getRuleContext(ContentContext.class,0);
-		}
 		public AttributeContext attribute(int i) {
 			return getRuleContext(AttributeContext.class,i);
+		}
+		public ContentContext content() {
+			return getRuleContext(ContentContext.class,0);
 		}
 		public TerminalNode Name(int i) {
 			return getToken(XMLParser.Name, i);
@@ -450,8 +450,8 @@ public class XMLParser extends Parser {
 	}
 
 	public static class AttributeContext extends ParserRuleContext {
-		public TerminalNode STRING() { return getToken(XMLParser.STRING, 0); }
 		public TerminalNode Name() { return getToken(XMLParser.Name, 0); }
+		public TerminalNode STRING() { return getToken(XMLParser.STRING, 0); }
 		public AttributeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -489,8 +489,8 @@ public class XMLParser extends Parser {
 	}
 
 	public static class ChardataContext extends ParserRuleContext {
-		public TerminalNode TEXT() { return getToken(XMLParser.TEXT, 0); }
 		public TerminalNode SEA_WS() { return getToken(XMLParser.SEA_WS, 0); }
+		public TerminalNode TEXT() { return getToken(XMLParser.TEXT, 0); }
 		public ChardataContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}

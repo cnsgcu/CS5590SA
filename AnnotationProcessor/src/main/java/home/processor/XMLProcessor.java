@@ -17,12 +17,14 @@ import java.util.TreeSet;
 public class XMLProcessor extends XMLParserBaseListener
 {
     final private TokenStream tokens;
+    final private FileProcessor fileProcessor;
     final private TokenStreamRewriter rewriter;
     final private Set<FeatureOpt> featureOptSet;
 
-    public XMLProcessor(TokenStream tokens, FeatureOpt... featureOpts)
+    public XMLProcessor(FileProcessor fileProcessor, TokenStream tokens, FeatureOpt... featureOpts)
     {
         this.tokens = tokens;
+        this.fileProcessor = fileProcessor;
         this.rewriter = new TokenStreamRewriter(tokens);
         this.featureOptSet = new TreeSet<>(Arrays.asList(featureOpts));
     }
@@ -43,17 +45,19 @@ public class XMLProcessor extends XMLParserBaseListener
 
         if (tokenList != null) {
             final Token token = tokenList.get(0);
-            String featureName = token.getText().trim();
-            featureName = featureName.substring(4, featureName.length() - 3).trim();
+            final String fOptName = token.getText().trim();
+            final FeatureOpt featureOpt = FeatureOpt.valueOf(
+                fOptName.substring("<!--".length(), fOptName.length() - "-->".length())
+                        .trim()
+                        .toUpperCase()
+            );
 
-            for (FeatureOpt opt : featureOptSet) {
-                if (opt.name().toLowerCase().equals(featureName)) {
-                    rewriter.delete(token.getTokenIndex(), ctx.getStop().getTokenIndex());
-                    return;
-                }
+            if (featureOptSet.contains(featureOpt)) {
+                fileProcessor.addPruneFiles(ctx);
+                rewriter.delete(token.getTokenIndex(), ctx.getStop().getTokenIndex());
+            } else {
+                rewriter.delete(token.getTokenIndex());
             }
-
-            rewriter.delete(token.getTokenIndex());
         }
     }
 }

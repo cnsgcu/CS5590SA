@@ -12,10 +12,8 @@ import java.lang.annotation.Target;
     ElementType.FIELD,
     ElementType.METHOD,
     ElementType.PACKAGE,
-    ElementType.TYPE_USE,
     ElementType.PARAMETER,
     ElementType.CONSTRUCTOR,
-    ElementType.TYPE_PARAMETER,
     ElementType.LOCAL_VARIABLE,
     ElementType.ANNOTATION_TYPE,
 })
