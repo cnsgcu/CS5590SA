@@ -19,7 +19,7 @@ import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ProductLineProcessorTest
+public class ProductLineProcessor
 {
     private static final String SRC_DIR = "AnnotationProcessor/src/main/resources/home/";
     private static final String DST_DIR = "AnnotationProcessor/src/test/resources/home/";
@@ -43,10 +43,12 @@ public class ProductLineProcessorTest
     private static List<File> srcFiles(File srcDir, List<File> srcFiles)
     {
         for (File file : srcDir.listFiles()) {
-            if (file.isDirectory()) {
-                srcFiles(file, srcFiles);
-            } else if (file.getName().endsWith(".java")) {
-                srcFiles.add(file);
+            if (!file.isHidden()) {
+                if (file.isDirectory()) {
+                    srcFiles(file, srcFiles);
+                } else if (file.getName().endsWith(".java")) {
+                    srcFiles.add(file);
+                }
             }
         }
 
