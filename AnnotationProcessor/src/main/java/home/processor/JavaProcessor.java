@@ -143,17 +143,17 @@ public class JavaProcessor extends JavaBaseListener
             if (arrayInitializerCtx != null) {
                 for (ParseTree child : arrayInitializerCtx.children) {
                     if (child instanceof JavaParser.ElementValueContext) {
-                        final String name = child.getText().replace(FeatureOpt.class.getSimpleName() + ".", "");
+                        final String fOptName = child.getText().replace(FeatureOpt.class.getSimpleName() + ".", "");
 
-                        if (!featureOptSet.contains(FeatureOpt.valueOf(name))) {
+                        if (!featureOptSet.contains(FeatureOpt.valueOf(fOptName))) {
                             return false;
                         }
                     }
                 }
             } else {
-                final String name = ctx.elementValue().getText().replace(FeatureOpt.class.getSimpleName() + ".", "");
+                final String fOptName = ctx.elementValue().getText().replace(FeatureOpt.class.getSimpleName() + ".", "");
 
-                if (!featureOptSet.contains(FeatureOpt.valueOf(name))) {
+                if (!featureOptSet.contains(FeatureOpt.valueOf(fOptName))) {
                     return false;
                 }
             }
