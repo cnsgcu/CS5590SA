@@ -21,8 +21,8 @@ public class ProductLineProcessorTest
 {
     private static final String IN_SRC  = "AnnotationProcessor/src/main/resources/home/";
     private static final String OUT_SRC = "AnnotationProcessor/src/test/resources/home/";
-    private static final String ANNOTATED_CLIENT = "AnnotationProcessor/src/test/resources/home/com/pla/chatsys/client/ClientImp.java";
-    private static final String ANNOTATED_SERVER = "AnnotationProcessor/src/test/resources/home/com/pla/chatsys/server/ServerImp.java";
+    private static final String ANNOTATED_CLIENT = OUT_SRC + "com/pla/chatsys/client/ClientImp.java";
+    private static final String ANNOTATED_SERVER = OUT_SRC + "com/pla/chatsys/server/ServerImp.java";
 
     public static void main(String[] args)
     {
@@ -93,8 +93,8 @@ public class ProductLineProcessorTest
                 @Override
                 public boolean accept(File file) {
                     return !file.isHidden()
-                            && !file.getName().endsWith("xml")
-                            && !filePruner.contains(file.getPath().replace(fout, ""));
+                        && !file.getName().endsWith("xml")
+                        && !filePruner.contains(file.getPath().replace(fout, ""));
                 }
             });
         } catch (IOException e) {
