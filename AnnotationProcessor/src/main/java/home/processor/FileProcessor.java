@@ -10,19 +10,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class FileProcessor
 {
-    final private File srcDir;
-    final private File dstDir;
-    final private Set<String> pruneFiles = new TreeSet<>();
+    final private File srcRoot;
+    final private File dstRoot;
+    final private Set<String> pruneFiles = new HashSet<>();
 
     public FileProcessor(String fin, String fout)
     {
-        this.srcDir = new File(fin);
-        this.dstDir = new File(fout);
+        this.srcRoot = new File(fin);
+        this.dstRoot = new File(fout);
     }
 
     public boolean contains(String filePath)
@@ -32,22 +32,22 @@ public class FileProcessor
 
     public void prune(FileFilter filter)
     {
-        relocate(srcDir, dstDir, filter);
+        relocate(srcRoot, dstRoot, filter);
     }
 
-    private void relocate(File srcRoot, File dstRoot, FileFilter fileFilter)
+    private void relocate(File srcDir, File dstDir, FileFilter fileFilter)
     {
-        if (fileFilter.accept(dstRoot)) {
-            if (!dstRoot.exists()) {
-                dstRoot.mkdir();
+        if (fileFilter.accept(dstDir)) {
+            if (!dstDir.exists()) {
+                dstDir.mkdir();
             }
 
-            for (File file : srcRoot.listFiles()) {
+            for (File file : srcDir.listFiles()) {
                 final String fn = file.getName();
-                final File dst = new File(dstRoot, fn);
+                final File dst = new File(dstDir, fn);
 
                 if (file.isDirectory()) {
-                    final File src = new File(srcRoot, fn);
+                    final File src = new File(srcDir, fn);
                     relocate(src, dst, fileFilter);
                 } else {
                     if (fileFilter.accept(dst)) {

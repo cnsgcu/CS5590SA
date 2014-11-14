@@ -14,9 +14,9 @@ import org.antlr.v4.runtime.TokenStreamRewriter;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class JavaProcessor extends JavaBaseListener
 {
@@ -28,7 +28,7 @@ public class JavaProcessor extends JavaBaseListener
     {
         this.tokens = tokens;
         this.rewriter = new TokenStreamRewriter(tokens);
-        this.featureOptSet = new TreeSet<>(Arrays.asList(featureOpts));
+        this.featureOptSet = new HashSet<>(Arrays.asList(featureOpts));
     }
 
     @Override

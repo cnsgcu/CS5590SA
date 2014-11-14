@@ -10,9 +10,9 @@ import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.TokenStreamRewriter;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class XMLProcessor extends XMLParserBaseListener
 {
@@ -26,7 +26,7 @@ public class XMLProcessor extends XMLParserBaseListener
         this.tokens = tokens;
         this.fileProcessor = fileProcessor;
         this.rewriter = new TokenStreamRewriter(tokens);
-        this.featureOptSet = new TreeSet<>(Arrays.asList(featureOpts));
+        this.featureOptSet = new HashSet<>(Arrays.asList(featureOpts));
     }
 
     @Override

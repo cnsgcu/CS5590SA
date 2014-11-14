@@ -16,13 +16,15 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ProductLineProcessorTest
 {
-    private static final String IN_SRC  = "AnnotationProcessor/src/main/resources/home/";
-    private static final String OUT_SRC = "AnnotationProcessor/src/test/resources/home/";
-    private static final String ANNOTATED_CLIENT = OUT_SRC + "com/pla/chatsys/client/ClientImp.java";
-    private static final String ANNOTATED_SERVER = OUT_SRC + "com/pla/chatsys/server/ServerImp.java";
+    private static final String SRC_DIR = "AnnotationProcessor/src/main/resources/home/";
+    private static final String DST_DIR = "AnnotationProcessor/src/test/resources/home/";
+
+    private static final String ANNOTATED_ARCH = "chat_pla.xml";
 
     public static void main(String[] args)
     {
@@ -31,13 +33,27 @@ public class ProductLineProcessorTest
 
     private static void pruneFeatures(FeatureOpt... opts)
     {
-        pruneArch(IN_SRC, OUT_SRC, opts);
+        pruneArch(SRC_DIR, DST_DIR, opts);
 
-        pruneSource(ANNOTATED_CLIENT, opts);
-        pruneSource(ANNOTATED_SERVER, opts);
+        for (File srcFile : srcFiles(new File(DST_DIR), new LinkedList<File>())) {
+            pruneSource(srcFile, opts);
+        }
     }
 
-    private static void pruneSource(String srcFile, FeatureOpt... opts)
+    private static List<File> srcFiles(File srcDir, List<File> srcFiles)
+    {
+        for (File file : srcDir.listFiles()) {
+            if (file.isDirectory()) {
+                srcFiles(file, srcFiles);
+            } else if (file.getName().endsWith(".java")) {
+                srcFiles.add(file);
+            }
+        }
+
+        return srcFiles;
+    }
+
+    private static void pruneSource(File srcFile, FeatureOpt... opts)
     {
         try (final InputStream fileStream = new FileInputStream(srcFile)) {
             final ANTLRInputStream antIS = new ANTLRInputStream(fileStream);
@@ -65,9 +81,7 @@ public class ProductLineProcessorTest
 
     private static void pruneArch(final String fin, final String fout, FeatureOpt... opts)
     {
-        final String archFileName = "chat_pla.xml";
-
-        try (final InputStream fileStream = new FileInputStream(fin + archFileName)) {
+        try (final InputStream fileStream = new FileInputStream(fin + ANNOTATED_ARCH)) {
             final ANTLRInputStream antIS = new ANTLRInputStream(fileStream);
 
             final XMLLexer lexer = new XMLLexer(antIS);
@@ -83,7 +97,7 @@ public class ProductLineProcessorTest
 
             walker.walk(pruner, tree);
 
-            try (FileWriter writer = new java.io.FileWriter(fout + archFileName)) {
+            try (FileWriter writer = new java.io.FileWriter(fout + ANNOTATED_ARCH)) {
                 writer.write(pruner.toString());
             } catch (IOException e) {
                 e.printStackTrace();
