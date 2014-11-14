@@ -19,10 +19,10 @@ public class FileProcessor
     final private File dstRoot;
     final private Set<String> pruneFiles = new HashSet<>();
 
-    public FileProcessor(String fin, String fout)
+    public FileProcessor(String srcDir, String dstDir)
     {
-        this.srcRoot = new File(fin);
-        this.dstRoot = new File(fout);
+        this.srcRoot = new File(srcDir);
+        this.dstRoot = new File(dstDir);
     }
 
     public boolean contains(String filePath)

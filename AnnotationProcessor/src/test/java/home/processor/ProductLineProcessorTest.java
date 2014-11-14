@@ -28,7 +28,7 @@ public class ProductLineProcessorTest
 
     public static void main(String[] args)
     {
-        pruneFeatures(FeatureOpt.CHAT_HISTORY, FeatureOpt.TEMPLATE, FeatureOpt.GAME);
+        pruneFeatures();
     }
 
     private static void pruneFeatures(FeatureOpt... opts)
@@ -79,9 +79,9 @@ public class ProductLineProcessorTest
         }
     }
 
-    private static void pruneArch(final String fin, final String fout, FeatureOpt... opts)
+    private static void pruneArch(final String srcDir, final String dstDir, FeatureOpt... opts)
     {
-        try (final InputStream fileStream = new FileInputStream(fin + ANNOTATED_ARCH)) {
+        try (final InputStream fileStream = new FileInputStream(srcDir + ANNOTATED_ARCH)) {
             final ANTLRInputStream antIS = new ANTLRInputStream(fileStream);
 
             final XMLLexer lexer = new XMLLexer(antIS);
@@ -92,12 +92,12 @@ public class ProductLineProcessorTest
 
             final ParseTreeWalker walker = new ParseTreeWalker();
 
-            final FileProcessor filePruner = new FileProcessor(fin, fout);
+            final FileProcessor filePruner = new FileProcessor(srcDir, dstDir);
             final XMLProcessor pruner = new XMLProcessor(filePruner, tokens, opts);
 
             walker.walk(pruner, tree);
 
-            try (FileWriter writer = new java.io.FileWriter(fout + ANNOTATED_ARCH)) {
+            try (FileWriter writer = new java.io.FileWriter(dstDir + ANNOTATED_ARCH)) {
                 writer.write(pruner.toString());
             } catch (IOException e) {
                 e.printStackTrace();
@@ -108,7 +108,7 @@ public class ProductLineProcessorTest
                 public boolean accept(File file) {
                     return !file.isHidden()
                         && !file.getName().endsWith("xml")
-                        && !filePruner.contains(file.getPath().replace(fout, ""));
+                        && !filePruner.contains(file.getPath().replace(dstDir, ""));
                 }
             });
         } catch (IOException e) {
