@@ -44,13 +44,11 @@ public class JavaProcessor extends JavaBaseListener
             || FeatureOpt.class.getName().equals(ctx.getChild(1).getText())) {
             rewriter.delete(ctx.getStart(), ctx.getStop());
         } else {
-            pruneBlock(
-                ctx,
-                new Consumer<Token>() {
-                    @Override
-                    public void accept(Token token) {
-                        rewriter.delete(token, ctx.getStop());
-                    }
+            pruneBlock(ctx, new Consumer<Token>() {
+                @Override
+                public void accept(Token token) {
+                    rewriter.delete(token, ctx.getStop());
+                }
             });
         }
     }
@@ -58,13 +56,11 @@ public class JavaProcessor extends JavaBaseListener
     @Override
     public void exitStatement(final JavaParser.StatementContext ctx)
     {
-        pruneBlock(
-            ctx,
-            new Consumer<Token>() {
-                @Override
-                public void accept(Token token) {
-                    rewriter.delete(token, ctx.getStop());
-                }
+        pruneBlock(ctx, new Consumer<Token>() {
+            @Override
+            public void accept(Token token) {
+                rewriter.delete(token, ctx.getStop());
+            }
         });
     }
 
