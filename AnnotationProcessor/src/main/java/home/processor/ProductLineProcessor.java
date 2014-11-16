@@ -21,31 +21,43 @@ import java.util.List;
 
 public class ProductLineProcessor
 {
-    private static final String SRC_DIR = "AnnotationProcessor/src/main/resources/home/";
-    private static final String DST_DIR = "AnnotationProcessor/src/test/resources/home/";
+//    public static void main(String[] args)
+//    {
+//        ProductLineProcessor plProcessor = new ProductLineProcessor(
+//            new File("AnnotationProcessor/src/main/resources/home"),
+//            new File("AnnotationProcessor/src/main/resources/home/chat_pla.xml"),
+//            new File("AnnotationProcessor/src/test/resources/home")
+//        );
+//
+//        plProcessor.pruneFeatures(FeatureOpt.CHAT_HISTORY);
+//    }
+//
+    private final File archFile;
+    private final File sourceDir;
+    private final File destinationDir;
 
-    private static final String ANNOTATED_ARCH = "chat_pla.xml";
-
-    public static void main(String[] args)
+    public ProductLineProcessor(File sourceDir, File archFile, File destinationDir)
     {
-        pruneFeatures();
+        this.archFile = archFile;
+        this.sourceDir = sourceDir;
+        this.destinationDir = destinationDir;
     }
 
-    private static void pruneFeatures(FeatureOpt... opts)
+    public void pruneFeatures(FeatureOpt... opts)
     {
-        pruneArch(SRC_DIR, DST_DIR, opts);
+        pruneArch(opts);
 
-        for (File srcFile : srcFiles(new File(DST_DIR), new LinkedList<File>())) {
+        for (File srcFile : getSrcFiles(destinationDir, new LinkedList<File>())) {
             pruneSource(srcFile, opts);
         }
     }
 
-    private static List<File> srcFiles(File srcDir, List<File> srcFiles)
+    private List<File> getSrcFiles(File srcDir, List<File> srcFiles)
     {
         for (File file : srcDir.listFiles()) {
             if (!file.isHidden()) {
                 if (file.isDirectory()) {
-                    srcFiles(file, srcFiles);
+                    getSrcFiles(file, srcFiles);
                 } else if (file.getName().endsWith(".java")) {
                     srcFiles.add(file);
                 }
@@ -55,7 +67,7 @@ public class ProductLineProcessor
         return srcFiles;
     }
 
-    private static void pruneSource(File srcFile, FeatureOpt... opts)
+    private void pruneSource(File srcFile, FeatureOpt... opts)
     {
         try (final InputStream fileStream = new FileInputStream(srcFile)) {
             final ANTLRInputStream antIS = new ANTLRInputStream(fileStream);
@@ -67,12 +79,12 @@ public class ProductLineProcessor
             final ParseTree tree = parser.compilationUnit();
 
             final ParseTreeWalker walker = new ParseTreeWalker();
-            final JavaProcessor pruner = new JavaProcessor(tokens, opts);
+            final JavaProcessor srcPruner = new JavaProcessor(tokens, opts);
 
-            walker.walk(pruner, tree);
+            walker.walk(srcPruner, tree);
 
             try (FileWriter writer = new FileWriter(srcFile)) {
-                writer.write(pruner.toString());
+                writer.write(srcPruner.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -81,9 +93,9 @@ public class ProductLineProcessor
         }
     }
 
-    private static void pruneArch(final String srcDir, final String dstDir, FeatureOpt... opts)
+    private void pruneArch(FeatureOpt... opts)
     {
-        try (final InputStream fileStream = new FileInputStream(srcDir + ANNOTATED_ARCH)) {
+        try (final InputStream fileStream = new FileInputStream(archFile)) {
             final ANTLRInputStream antIS = new ANTLRInputStream(fileStream);
 
             final XMLLexer lexer = new XMLLexer(antIS);
@@ -94,23 +106,22 @@ public class ProductLineProcessor
 
             final ParseTreeWalker walker = new ParseTreeWalker();
 
-            final FileProcessor filePruner = new FileProcessor(srcDir, dstDir);
-            final XMLProcessor pruner = new XMLProcessor(filePruner, tokens, opts);
+            final FileProcessor filePruner = new FileProcessor(sourceDir, destinationDir);
+            final XMLProcessor archPruner = new XMLProcessor(filePruner, tokens, opts);
 
-            walker.walk(pruner, tree);
+            walker.walk(archPruner, tree);
 
-            try (FileWriter writer = new java.io.FileWriter(dstDir + ANNOTATED_ARCH)) {
-                writer.write(pruner.toString());
+            try (FileWriter writer = new java.io.FileWriter(new File(destinationDir, archFile.getName()))) {
+                writer.write(archPruner.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
             filePruner.prune(new FileFilter() {
-                @Override
-                public boolean accept(File file) {
+                @Override public boolean accept(File file) {
                     return !file.isHidden()
                         && !file.getName().endsWith("xml")
-                        && !filePruner.contains(file.getPath().replace(dstDir, ""));
+                        && !filePruner.contains(file.getPath().replace(destinationDir.getPath() + "/", ""));
                 }
             });
         } catch (IOException e) {

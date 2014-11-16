@@ -116,7 +116,7 @@ public class JavaProcessor extends JavaBaseListener
         if (leftHiddenTokens != null) {
             for (Token hiddenToken : leftHiddenTokens) {
                 final String htText = hiddenToken.getText();
-                final ANTLRInputStream htInputStream = new ANTLRInputStream(htText.substring(2, htText.length() - 2));
+                final ANTLRInputStream htInputStream = new ANTLRInputStream(htText.substring("/*".length(), htText.length() - "*/".length()));
 
                 final JavaLexer htLexer = new JavaLexer(htInputStream);
                 final CommonTokenStream htStream = new CommonTokenStream(htLexer);

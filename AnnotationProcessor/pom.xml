@@ -27,13 +27,13 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>home.processor.ProductLineProcessor</mainClass>
+                            <mainClass>home.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-                    <finalName>PLP</finalName>
+                    <finalName>App</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
                 <executions>
@@ -51,7 +51,7 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <excludes>
-                    <exclude>**</exclude>
+                    <exclude>/home/**</exclude>
                 </excludes>
             </resource>
         </resources>
