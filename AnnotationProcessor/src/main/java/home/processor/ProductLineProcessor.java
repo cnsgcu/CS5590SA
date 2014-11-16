@@ -21,17 +21,6 @@ import java.util.List;
 
 public class ProductLineProcessor
 {
-//    public static void main(String[] args)
-//    {
-//        ProductLineProcessor plProcessor = new ProductLineProcessor(
-//            new File("AnnotationProcessor/src/main/resources/home"),
-//            new File("AnnotationProcessor/src/main/resources/home/chat_pla.xml"),
-//            new File("AnnotationProcessor/src/test/resources/home")
-//        );
-//
-//        plProcessor.pruneFeatures(FeatureOpt.CHAT_HISTORY);
-//    }
-//
     private final File archFile;
     private final File sourceDir;
     private final File destinationDir;
