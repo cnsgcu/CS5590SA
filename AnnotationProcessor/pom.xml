@@ -51,7 +51,7 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <excludes>
-                    <exclude>/home/**</exclude>
+                    <exclude>**/home/*</exclude>
                 </excludes>
             </resource>
         </resources>
