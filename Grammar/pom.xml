@@ -4,18 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <properties>
-        <grammar.version>1.0-SNAPSHOT</grammar.version>
-    </properties>
-
     <parent>
         <groupId>JavaLab</groupId>
         <artifactId>JavaLab</artifactId>
-        <version>${lab.version}</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>Grammar</artifactId>
-    <version>${grammar.version}</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <build>

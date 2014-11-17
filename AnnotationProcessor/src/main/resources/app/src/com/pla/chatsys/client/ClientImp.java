@@ -114,6 +114,7 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 		
 		addSettingButton(topPanel);
 		addTrackButton(topPanel);
+        /*@Feature(FeatureOpt.FILE_SHARING)*/
 		addFileShareButton(topPanel);
 		addColorPickerButton(topPanel);
         /*@Feature(FeatureOpt.GAME)*/
