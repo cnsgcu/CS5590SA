@@ -33,7 +33,7 @@
                </TextField>
            </center>
            <left>
-               <Label text="Architecture:" BorderPane.alignment="CENTER" />
+               <Label prefHeight="16.0" prefWidth="82.0" text="Architecture:" BorderPane.alignment="CENTER" />
            </left>
            <right>
                <Button fx:id="archChooser" mnemonicParsing="false" text="..." BorderPane.alignment="CENTER" />
