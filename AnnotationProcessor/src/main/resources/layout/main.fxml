@@ -54,7 +54,7 @@
                <Button fx:id="dstChooser" mnemonicParsing="false" text="..." BorderPane.alignment="CENTER" />
            </right>
        </BorderPane>
-       <GridPane fx:id="features">
+       <GridPane fx:id="features" prefHeight="90.0" prefWidth="600.0">
            <columnConstraints>
                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

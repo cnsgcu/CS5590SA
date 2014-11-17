@@ -73,7 +73,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    private void setDirectoryChooser(final Stage primaryStage, Button chooser, final TextField choiceText) {
+    private void setDirectoryChooser(final Stage primaryStage, final Button chooser, final TextField choiceText) {
         final DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Select a folder");
 
@@ -89,12 +89,12 @@ public class Main extends Application {
     }
 
     private void setFileChooser(final Stage primaryStage, final Button chooser, final TextField choiceText) {
-        final FileChooser directoryChooser = new FileChooser();
-        directoryChooser.setTitle("Select a file");
+        final FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select a file");
 
         chooser.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent actionEvent) {
-                File file = directoryChooser.showOpenDialog(primaryStage);
+                File file = fileChooser.showOpenDialog(primaryStage);
 
                 if (file != null) {
                     choiceText.setText(file.getPath());
