@@ -110,7 +110,7 @@ public class ProductLineProcessor
                 @Override public boolean accept(File file) {
                     return !file.isHidden()
                         && !file.getName().endsWith("xml")
-                        && !filePruner.contains(file.getPath().replace(destinationDir.getPath() + "/", ""));
+                        && !filePruner.contains(file.getPath().replace(destinationDir.getPath() + File.separator, ""));
                 }
             });
         } catch (IOException e) {

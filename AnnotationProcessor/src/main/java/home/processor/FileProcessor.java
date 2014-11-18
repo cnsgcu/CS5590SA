@@ -74,7 +74,7 @@ public class FileProcessor
     {
         if ("types:interfaceType".equals(ctx.getChild(1).getText())) {
             ParseTree tree = getInterfaceImp(ctx);
-            pruneFiles.add(tree.getText().replace('.', '/') + ".java");
+            pruneFiles.add(tree.getText().replace(".", File.separator) + ".java");
         } else if ("types:component".equals(ctx.getChild(1).getText())) {
             ParseTree tree = getComponentImp(ctx);
 
@@ -85,7 +85,7 @@ public class FileProcessor
                     for (ParseTree gChild : cntCtx.children) {
                         if (gChild instanceof XMLParser.ElementContext) {
                             String fn = gChild.getChild(4).getChild(1).getChild(4).getText();
-                            pruneFiles.add(fn.substring(0, fn.lastIndexOf('.')).replace('.', '/'));
+                            pruneFiles.add(fn.substring(0, fn.lastIndexOf('.')).replace(".", File.separator));
                         }
                     }
                 }
