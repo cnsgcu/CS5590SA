@@ -63,16 +63,22 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 
 	JFrame f = new JFrame();
 	JTextField entryField;
-	JButton template;
 	JButton sendButton;
-	JButton loadButton;
 	JButton trackButton;
-	JButton TTTButton;
-	JButton ImageButton;
 	JEditorPane transcript = new JEditorPane("text/html", "");
 	JButton printButton;
 	JButton privateButton;
-	JButton fileButton;
+
+    @Feature(FeatureOpt.GAME)
+    JButton TTTButton;
+    @Feature(FeatureOpt.TEMPLATE)
+    JButton template;
+    @Feature(FeatureOpt.CHAT_HISTORY)
+    JButton loadButton;
+    @Feature(FeatureOpt.FILE_SHARING)
+    JButton fileButton;
+    @Feature(FeatureOpt.IMAGE_SHARING)
+    JButton ImageButton;
 
 	JButton colorButton;
 	JButton settingsButton;
@@ -130,11 +136,7 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 		
 		entryField = new JTextField(20);
 		sendButton = new JButton("Send");
-		template = new JButton("Templates");
-		
-		ImageButton = new JButton("Send Image");
 
-		loadButton = new JButton("Chat History");
 		transcript.setEditable(false);
 		sendButton.addActionListener(this);
 		
@@ -142,62 +144,13 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 		bottomPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		bottomPanel.add(entryField);
 		bottomPanel.add(sendButton);
-		bottomPanel.add(loadButton);
-		bottomPanel.add(template);
-		bottomPanel.add(ImageButton);
 
         /*@Feature(FeatureOpt.CHAT_HISTORY)*/
-		loadButton.addActionListener(new ActionListener() {
-			@Override public void actionPerformed(ActionEvent e) {
-				String ChatHistory = _arch.OUT_IHistoryRetrive.retriveChatHistory(getTitle());
-				transcript.setText(ChatHistory);
-			}
-		});
-
-        /*@Feature(FeatureOpt.TEMPLATE)*/
-		template.addActionListener(new ActionListener() {
-			@Override public void actionPerformed(ActionEvent arg0) {
-				TemplateGUI temp = new TemplateGUI();
-				temp.setSelectInterface(new SelectInterfce() {
-					@Override public void onItemSelect(String msg1) {
-						if (!msg1.equals("")) {
-							_arch.OUT_ISendTemplet.sendTemplet(getTitle(), msg1);
-						}
-					}
-				});
-			}
-		});
-
+        addChatHistoryButton(bottomPanel);
+		/*@Feature(FeatureOpt.TEMPLATE)*/
+        addTemplateButton(bottomPanel);
         /*@Feature(FeatureOpt.IMAGE_SHARING)*/
-		ImageButton.addActionListener(new ActionListener() {
-			@Override public void actionPerformed(ActionEvent arg0) {
-				JFileChooser fileChooser = new JFileChooser();
-				fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileFilter() {
-					@Override public boolean accept(File f) {
-						String filename = f.getName();
-						if (filename.endsWith(".jpg")
-								|| filename.endsWith(".jpeg")
-								|| filename.endsWith(".png")
-								|| filename.endsWith(".bmp")
-								|| filename.endsWith(".gif")
-								|| filename.endsWith(".jpe")) {
-
-							return true;
-						}
-						return false;
-					}
-
-					@Override public String getDescription() {
-						return "JPEG files";
-					}
-				});
-				int fileStatus = fileChooser.showDialog(ClientImp.this, "Select file");
-				if (fileStatus == JFileChooser.APPROVE_OPTION) {
-					File f = fileChooser.getSelectedFile();
-					_arch.OUT_ISendImage.sendImage(getTitle(), f.getName(), getBytes(f));
-				}
-			}
-		});
+        addImageButton(bottomPanel);
 
 		f.getContentPane().add("Center", centerPanel);
 		f.getContentPane().add("South", bottomPanel);
@@ -215,6 +168,72 @@ public class ClientImp extends JFrame implements ActionListener, IClientImp {
 		model.addElement("Do not Disturb");
 		topPanel.add(comboBox);
 	}
+
+    @Feature(FeatureOpt.TEMPLATE)
+    private void addTemplateButton(JPanel bottomPanel) {
+        template = new JButton("Templates");
+
+        template.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent arg0) {
+                TemplateGUI temp = new TemplateGUI();
+                temp.setSelectInterface(new SelectInterfce() {
+                    @Override public void onItemSelect(String msg1) {
+                        if (!msg1.equals("")) {
+                            _arch.OUT_ISendTemplet.sendTemplet(getTitle(), msg1);
+                        }
+                    }
+                });
+            }
+        });
+        bottomPanel.add(template);
+    }
+
+    @Feature(FeatureOpt.CHAT_HISTORY)
+    private void addChatHistoryButton(JPanel bottomPanel) {
+        loadButton = new JButton("Chat History");
+        loadButton.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent e) {
+                String ChatHistory = _arch.OUT_IHistoryRetrive.retriveChatHistory(getTitle());
+                transcript.setText(ChatHistory);
+            }
+        });
+        bottomPanel.add(loadButton);
+    }
+
+    @Feature(FeatureOpt.IMAGE_SHARING)
+    private void addImageButton(JPanel bottomPanel) {
+        ImageButton = new JButton("Send Image");
+        ImageButton.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent arg0) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileFilter() {
+                    @Override public boolean accept(File f) {
+                        String filename = f.getName();
+                        if (filename.endsWith(".jpg")
+                                || filename.endsWith(".jpeg")
+                                || filename.endsWith(".png")
+                                || filename.endsWith(".bmp")
+                                || filename.endsWith(".gif")
+                                || filename.endsWith(".jpe")) {
+
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    @Override public String getDescription() {
+                        return "JPEG files";
+                    }
+                });
+                int fileStatus = fileChooser.showDialog(ClientImp.this, "Select file");
+                if (fileStatus == JFileChooser.APPROVE_OPTION) {
+                    File f = fileChooser.getSelectedFile();
+                    _arch.OUT_ISendImage.sendImage(getTitle(), f.getName(), getBytes(f));
+                }
+            }
+        });
+        bottomPanel.add(ImageButton);
+    }
 
 	private void addPrivateButton(JPanel topPanel) {
 		privateButton = new JButton(new ImageIcon(IconPath + "Private.png"));
